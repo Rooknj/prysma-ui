@@ -1,0 +1,14 @@
+language: node_js
+node_js: "stable"
+sudo: required
+cache: yarn
+script:
+  - yarn test --no-watch
+  - yarn build
+# deploy:
+#   provider: releases
+#   api_key: "GITHUB OAUTH TOKEN"
+#   file: "FILE TO UPLOAD"
+#   skip_cleanup: true
+#   on:
+#     tags: true
