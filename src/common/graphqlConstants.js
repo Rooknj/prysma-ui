@@ -47,11 +47,12 @@ export const LIGHT_REMOVED = gql`
       ...lightFields
     }
   }
+  ${LIGHT_FIELDS}
 `;
 
 export const LIGHT_CHANGED = gql`
   subscription lightChanged {
-    lightsChanged {
+    lightChanged {
       ...lightFields
     }
   }

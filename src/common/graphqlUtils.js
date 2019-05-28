@@ -1,5 +1,5 @@
 import { throttle } from "lodash";
-import { GET_LIGHTS, GET_DISCOVERED_LIGHTS } from "common/graphqlConstants.js";
+import { LIGHTS, DISCOVERED_LIGHTS } from "common/graphqlConstants.js";
 
 export const updateCacheFromAddLightMutation = (
   cache,
@@ -10,11 +10,11 @@ export const updateCacheFromAddLightMutation = (
 
   // Remove the added light from GET_DISCOVERED_LIGHTS
   const { discoveredLights } = cache.readQuery({
-    query: GET_DISCOVERED_LIGHTS
+    query: DISCOVERED_LIGHTS
   });
 
   cache.writeQuery({
-    query: GET_DISCOVERED_LIGHTS,
+    query: DISCOVERED_LIGHTS,
     data: {
       discoveredLights: discoveredLights.filter(
         light => light.id !== addLight.id
@@ -24,7 +24,7 @@ export const updateCacheFromAddLightMutation = (
 
   // Remove the added light from GET_LIGHTS
   const { lights } = cache.readQuery({
-    query: GET_LIGHTS
+    query: LIGHTS
   });
 
   // If the light already exists, do nothing
@@ -32,7 +32,7 @@ export const updateCacheFromAddLightMutation = (
 
   // Write the light to the cache
   cache.writeQuery({
-    query: GET_LIGHTS,
+    query: LIGHTS,
     data: { lights: lights.concat([addLight]) }
   });
 };
