@@ -8,7 +8,6 @@ import { onError } from "apollo-link-error"; // Do custom logic when a GraphQL o
 import { getMainDefinition } from "apollo-utilities"; // Aids with splitting links
 
 const serverName = window.location.host;
-console.log(window.location);
 const ws_protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
 
 // Create an http link:
