@@ -1,6 +1,46 @@
 import { throttle } from "lodash";
+import { GET_LIGHTS, GET_DISCOVERED_LIGHTS } from "common/graphqlConstants.js";
 
-export const addLightToCache = (cacheData, { subscriptionData }) => {
+export const updateCacheFromAddLightMutation = (
+  cache,
+  { data: { addLight } }
+) => {
+  // If no data was returned, do nothing
+  if (!addLight) return;
+
+  // Remove the added light from GET_DISCOVERED_LIGHTS
+  const { discoveredLights } = cache.readQuery({
+    query: GET_DISCOVERED_LIGHTS
+  });
+
+  cache.writeQuery({
+    query: GET_DISCOVERED_LIGHTS,
+    data: {
+      discoveredLights: discoveredLights.filter(
+        light => light.id !== addLight.id
+      )
+    }
+  });
+
+  // Remove the added light from GET_LIGHTS
+  const { lights } = cache.readQuery({
+    query: GET_LIGHTS
+  });
+
+  // If the light already exists, do nothing
+  if (lights.find(light => light.id === addLight.id)) return;
+
+  // Write the light to the cache
+  cache.writeQuery({
+    query: GET_LIGHTS,
+    data: { lights: lights.concat([addLight]) }
+  });
+};
+
+export const updateCacheFromLightAddedSubscription = (
+  cacheData,
+  { subscriptionData }
+) => {
   // If no data was returned, do nothing
   if (!subscriptionData) return cacheData;
 
@@ -18,7 +58,10 @@ export const addLightToCache = (cacheData, { subscriptionData }) => {
   });
 };
 
-export const removeLightFromCache = (cacheData, { subscriptionData }) => {
+export const updateCacheFromLightRemovedSubscription = (
+  cacheData,
+  { subscriptionData }
+) => {
   // If no data was returned, do nothing
   if (!subscriptionData) return cacheData;
 
