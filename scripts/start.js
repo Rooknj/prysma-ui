@@ -21,10 +21,11 @@ if (argv.indexOf("--local") >= 0) {
   argv = argv.filter(arg => arg !== "--local");
 
   // Set the env variable to use the local server
-  console.log("Using Server at localhost:4001/graphql");
+  console.log("Using Server at http://localhost:4001");
   process.env.REACT_APP_USE_LOCAL_SERVER = true;
+  process.env.PROXY = "http://localhost:4001";
 } else {
-  console.log("Using Server at prysma.local/graphql");
+  console.log("Using Server at http://prysma.local");
 }
 
 spawn.sync("react-scripts", ["start", ...argv], {
