@@ -7,7 +7,8 @@ import { WebSocketLink } from "apollo-link-ws"; // Use Apollo Over Websockets (S
 import { onError } from "apollo-link-error"; // Do custom logic when a GraphQL or network error occurs
 import { getMainDefinition } from "apollo-utilities"; // Aids with splitting links
 
-const serverName = window.location.hostname;
+const serverName = window.location.host;
+console.log(window.location);
 const ws_protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
 
 // Create an http link:
