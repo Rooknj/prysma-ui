@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
+import "typeface-roboto"; // Font Import so we dont have to use the CDN
 import App from "./App";
-//import "typeface-roboto"; // Font Import so we dont have to use the CDN
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
