@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.0.1",
     "@material-ui/icons": "^4.0.1",
+    "@material-ui/styles": "^4.0.1",
     "apollo-cache-inmemory": "^1.6.0",
     "apollo-client": "^2.6.0",
     "apollo-link": "^1.2.11",
@@ -20,6 +21,7 @@
     "react-apollo-hooks": "^0.4.5",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
+    "styled-components": "^4.2.0",
     "subscriptions-transport-ws": "^0.9.16",
     "typeface-roboto": "^0.0.54"
   },
