@@ -32,15 +32,21 @@ const LIGHT_STATE_FIELDS = gql`
   }
 `;
 
+// This needs LIGHT_STATE_FIELDS for some reason
 export const LIGHT_ADDED = gql`
   subscription lightAdded {
     lightAdded {
       ...lightFields
+      state {
+        ...lightStateFields
+      }
     }
   }
   ${LIGHT_FIELDS}
+  ${LIGHT_STATE_FIELDS}
 `;
 
+// This can not have LIGHT_STATE_FIELDS for some reason
 export const LIGHT_REMOVED = gql`
   subscription lightRemoved {
     lightRemoved {
