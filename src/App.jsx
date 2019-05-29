@@ -16,8 +16,8 @@ const App = () => {
     <ApolloProvider client={client}>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
-          <CssBaseline>
-            <Router>
+          <Router>
+            <CssBaseline>
               <div>
                 <nav>
                   <ul>
@@ -33,8 +33,8 @@ const App = () => {
                 <Route path="/" exact component={Main} />
                 <Route path="/about/" component={About} />
               </div>
-            </Router>
-          </CssBaseline>
+            </CssBaseline>
+          </Router>
         </ThemeProvider>
       </StylesProvider>
     </ApolloProvider>
