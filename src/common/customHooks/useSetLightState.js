@@ -6,6 +6,9 @@ const throttleSpeed = process.env.REACT_APP_ENV === "test" ? 0 : 500;
 
 const useSetLightState = () => {
   const setLightState = useMutation(SET_LIGHT_STATE);
+
+  // Use a ref here to store the value of setLightState so that it doesn't change on rerenders.
+  // This is necessary for lodash throttle to function properly
   const { current: throttledSetLightState } = React.useRef(
     throttle(setLightState, throttleSpeed)
   );
