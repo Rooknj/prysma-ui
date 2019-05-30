@@ -7,7 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
-const Main = () => {
+const MainPage = () => {
   const { data, error, loading, networkStatus, refetch } = useLights();
 
   const setLightState = useSetLightState();
@@ -53,4 +53,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;

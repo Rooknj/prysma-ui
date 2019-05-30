@@ -4,9 +4,13 @@ import {
   LIGHT_CHANGED,
   LIGHT_STATE_CHANGED,
   LIGHT_ADDED,
-  LIGHT_REMOVED,
-  DISCOVERED_LIGHTS
+  LIGHT_REMOVED
 } from "common/graphqlConstants.js";
+import {
+  removeDiscoveredLightFromCache,
+  addLightToCache,
+  removeLightFromCache
+} from "common/graphqlUtils";
 
 const useLights = () => {
   const QueryData = useQuery(LIGHTS, {
@@ -32,41 +36,10 @@ const useLights = () => {
       if (!lightAdded) return;
 
       // Remove the added light from discoveredLights
-      try {
-        // Get the discovered lights in the cache
-        // This might throw an error if the discoveredLights query hasnt been called yet
-        const { discoveredLights } = client.readQuery({
-          query: DISCOVERED_LIGHTS
-        });
+      removeDiscoveredLightFromCache(client, lightAdded);
 
-        if (discoveredLights.length > 0) {
-          // Remove this newly addded light from discoveredLights if it exists
-          client.writeQuery({
-            query: DISCOVERED_LIGHTS,
-            data: {
-              discoveredLights: discoveredLights.filter(
-                light => light.id !== lightAdded.id
-              )
-            }
-          });
-        }
-      } catch (error) {
-        console.log("Discovered Lights does not exist in the cache yet.");
-      }
-
-      // Get the current lights in the cache
-      const { lights } = client.readQuery({
-        query: LIGHTS
-      });
-
-      // If the light was already added, return so we don't add it again
-      if (lights.find(light => light.id === lightAdded.id)) return;
-
-      // Add the light to the cache
-      client.writeQuery({
-        query: LIGHTS,
-        data: { lights: lights.concat([lightAdded]) }
-      });
+      // Add the light to LIGHTS
+      addLightToCache(client, lightAdded);
     }
   });
 
@@ -81,16 +54,7 @@ const useLights = () => {
       // If no data was returned, do nothing
       if (!lightRemoved) return;
 
-      // Get the current lights in the cache
-      const { lights } = client.readQuery({
-        query: LIGHTS
-      });
-
-      // Remove the light from the cache
-      client.writeQuery({
-        query: LIGHTS,
-        data: { lights: lights.filter(light => light.id !== lightRemoved.id) }
-      });
+      removeLightFromCache(client, lightRemoved);
     }
   });
 
