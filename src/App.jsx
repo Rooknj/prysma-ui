@@ -32,12 +32,14 @@ const App = () => {
                 </Tabs>
               </AppBar>
               <Switch>
+                {/* The switch uses the first route that matches instead of using multiple */}
                 <Route path="/" exact component={MainPage} />
                 <Route path="/about/" exact component={AboutPage} />
                 <Route path="/addLight/" exact component={AddLightPage} />
                 <Route path="/light/:id" exact component={LightPage} />
                 <Route component={NotFoundPage} />
               </Switch>
+              {/* Put any modals/things that can show up over pages that you want routed outside the switch*/}
             </CssBaseline>
           </Router>
         </ThemeProvider>
