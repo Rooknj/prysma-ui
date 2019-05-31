@@ -3,14 +3,16 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
 const AboutPage = props => {
-  const { match } = props;
+  const { match, location } = props;
   console.log(match);
   return (
     <div>
       <Link to={"/"}>
-        <Typography variant="body1">{"< Back"}</Typography>
+        <Typography variant="body1">{"< Back to main"}</Typography>
       </Link>
-      {match.params.id}
+      <Typography variant="h2">{`No Match For ${
+        location.pathname
+      }`}</Typography>
     </div>
   );
 };
