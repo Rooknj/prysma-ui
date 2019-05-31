@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -48,7 +49,9 @@ const MainPage = () => {
           disabled={!light.state.connected}
           color="primary"
         />
-        <Typography variant="body1">{light.name}</Typography>
+        <Link to={`/light/${light.id}`}>
+          <Typography variant="body1">{light.name}</Typography>
+        </Link>
       </StyledDiv>
     ));
   }

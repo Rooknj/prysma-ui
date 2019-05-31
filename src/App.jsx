@@ -12,14 +12,9 @@ import Tab from "@material-ui/core/Tab";
 import MainPage from "./pages/main";
 import AboutPage from "./pages/about";
 import AddLightPage from "./pages/addLight";
+import LightPage from "./pages/light";
 
 const theme = createMuiTheme();
-
-// const ROUTES = [
-//   { route: "/", component: MainPage },
-//   { route: "/about/", component: AboutPage },
-//   { route: "/addLight/", component: AddLightPage }
-// ];
 
 const App = () => {
   return (
@@ -30,7 +25,7 @@ const App = () => {
             <CssBaseline>
               <AppBar position="static">
                 <Tabs>
-                  <Tab label="Home" component={Link} exact to="/" />
+                  <Tab label="Home" component={Link} to="/" />
                   <Tab label="Add Light" component={Link} to="/addLight/" />
                   <Tab label="About" component={Link} to="/about/" />
                 </Tabs>
@@ -39,6 +34,7 @@ const App = () => {
                 <Route path="/" exact component={MainPage} />
                 <Route path="/about/" component={AboutPage} />
                 <Route path="/addLight/" component={AddLightPage} />
+                <Route path="/light/:id" component={LightPage} />
               </div>
             </CssBaseline>
           </Router>
