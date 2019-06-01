@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Switch from "@material-ui/core/Switch";
 import Slider from "common/components/Slider";
+import CircleColorPicker from "common/components/CircleColorPicker";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -20,13 +21,11 @@ const StyledDiv = styled.div`
 
 const AboutPage = props => {
   const { match } = props;
-  console.log(match);
 
   const [newName, setNewName] = React.useState("");
 
   const lightId = match.params.id;
   const { data, error, loading } = useLight(lightId);
-  console.log(data, error, loading);
   const setLight = useSetLight();
   const setLightState = useSetLightState();
   const removeLight = useRemoveLight();
@@ -61,6 +60,15 @@ const AboutPage = props => {
     setLightState(currentLightState.id, newLightState, currentLightState);
   };
 
+  const handleColorChange = currentLightState => color => {
+    const { r, g, b } = color.rgb;
+    const newLightState = {
+      color: { r, g, b }
+    };
+
+    setLightState(currentLightState.id, newLightState, currentLightState);
+  };
+
   let Body;
   if (loading) {
     Body = <Typography variant="body1">Loading...</Typography>;
@@ -81,7 +89,7 @@ const AboutPage = props => {
       colorOrder,
       stripType
     } = light;
-    const { connected, on, brightness } = light.state;
+    const { connected, on, brightness, color } = light.state;
     Body = (
       <div>
         <Typography variant="h3">{light.name}</Typography>
@@ -104,6 +112,13 @@ const AboutPage = props => {
           onChange={handleBrightnessChange(light.state)}
           disabled={!connected}
         />
+        <Typography variant="h6">{"Color: "}</Typography>
+        <CircleColorPicker
+          color={color}
+          onChange={handleColorChange(light)}
+          height={320}
+          width={320}
+        />
         <Typography variant="h6">{"Rename the light: "}</Typography>
         <TextField
           placeholder="New Light Name"
@@ -115,6 +130,16 @@ const AboutPage = props => {
         <Button onClick={handleRemoveLight}>Remove</Button>
         <Typography variant="h6">{"Config Info:"}</Typography>
         <Typography variant="body1">{`ID: ${id}`}</Typography>
+        <Typography variant="body1">{`Name: ${name}`}</Typography>
+        <Typography variant="body1">{`Supported Effects: ${supportedEffects}`}</Typography>
+        <Typography variant="body1">{`IP Address: ${ipAddress}`}</Typography>
+        <Typography variant="body1">{`MAC Address: ${macAddress}`}</Typography>
+        <Typography variant="body1">{`Number of LEDs: ${numLeds}`}</Typography>
+        <Typography variant="body1">{`UDP Port: ${udpPort}`}</Typography>
+        <Typography variant="body1">{`Version: ${version}`}</Typography>
+        <Typography variant="body1">{`Hardware: ${hardware}`}</Typography>
+        <Typography variant="body1">{`Color Order: ${colorOrder}`}</Typography>
+        <Typography variant="body1">{`Strip Type: ${stripType}`}</Typography>
       </div>
     );
   }
