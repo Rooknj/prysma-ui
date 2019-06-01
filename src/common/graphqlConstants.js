@@ -74,6 +74,19 @@ export const LIGHT_STATE_CHANGED = gql`
   ${LIGHT_STATE_FIELDS}
 `;
 
+export const LIGHT = gql`
+  query light($lightId: String!) {
+    light(lightId: $lightId) {
+      ...lightFields
+      state {
+        ...lightStateFields
+      }
+    }
+  }
+  ${LIGHT_FIELDS}
+  ${LIGHT_STATE_FIELDS}
+`;
+
 export const LIGHTS = gql`
   query lights {
     lights {

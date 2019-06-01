@@ -17,7 +17,7 @@ const SmoothSlider = props => {
 
   const handleChange = (_, newValue) => {
     setInternalValue(newValue);
-    onChange(_, newValue);
+    onChange(newValue);
   };
 
   return (
