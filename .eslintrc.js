@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ["eslint:recommended", "react-app"],
+  extends: [
+    // Shared Configs
+    "eslint:recommended",
+    // Project Specific Configs
+    "react-app",
+  ],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
@@ -15,9 +20,16 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  plugins: ["react", "jsx-a11y"],
+  plugins: [
+    // Shared Plugins
+    // Project Specific Plugins
+    "react",
+    "jsx-a11y",
+  ],
   rules: {
+    // Shared Rules
     "no-console": "warn",
     "no-unused-vars": "warn",
+    // Project Specific Rules
   },
 };
