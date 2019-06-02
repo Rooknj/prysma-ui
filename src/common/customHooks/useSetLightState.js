@@ -33,17 +33,17 @@ const useSetLightState = () => {
           __typename: "LightState",
           ...currentLightState,
           ...newLightState,
-          color: newColor
-        }
+          color: newColor,
+        },
       };
     }
 
     return throttledSetLightState({
       variables: {
         lightId: lightId,
-        lightState: newLightState
+        lightState: newLightState,
       },
-      optimisticResponse
+      optimisticResponse,
     });
   };
 

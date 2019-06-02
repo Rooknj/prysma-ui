@@ -12,15 +12,15 @@ const ws_protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
 
 // Create an http link:
 const httpLink = new HttpLink({
-  uri: window.location.protocol + "//" + serverName + "/graphql"
+  uri: window.location.protocol + "//" + serverName + "/graphql",
 });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
   uri: ws_protocol + "//" + serverName + "/graphql",
   options: {
-    reconnect: true
-  }
+    reconnect: true,
+  },
 });
 
 // This link will handle sending out HTTP and WS requests
@@ -52,9 +52,9 @@ const client = new ApolloClient({
   link: ApolloLink.from([
     ON_ERROR_LINK,
     //STATE_LINK,
-    HTTP_WS_LINK
+    HTTP_WS_LINK,
   ]),
-  cache: CACHE
+  cache: CACHE,
 });
 
 export default client;

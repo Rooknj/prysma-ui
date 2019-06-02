@@ -2,7 +2,7 @@ import { useQuery, useSubscription } from "react-apollo-hooks";
 import {
   LIGHT,
   LIGHT_CHANGED,
-  LIGHT_STATE_CHANGED
+  LIGHT_STATE_CHANGED,
 } from "common/graphqlConstants.js";
 
 const useLight = lightId => {
@@ -10,8 +10,8 @@ const useLight = lightId => {
     fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true,
     variables: {
-      lightId: lightId
-    }
+      lightId: lightId,
+    },
   });
 
   // This will automatically update the light in the cache when it gets a message

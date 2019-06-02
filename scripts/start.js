@@ -35,6 +35,6 @@ spawn.sync("react-scripts", ["start", ...argv], {
     PATH:
       process.env.PATH +
       delimiter +
-      pathResolve(process.cwd(), "node_modules", ".bin")
-  })
+      pathResolve(process.cwd(), "node_modules", ".bin"),
+  }),
 });

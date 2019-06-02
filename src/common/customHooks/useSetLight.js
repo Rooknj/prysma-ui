@@ -17,8 +17,8 @@ const useSetLight = () => {
     return throttledSetLight({
       variables: {
         lightId,
-        lightData
-      }
+        lightData,
+      },
     });
   };
 

@@ -2,7 +2,7 @@ import { useMutation } from "react-apollo-hooks";
 import { ADD_LIGHT } from "common/graphqlConstants.js";
 import {
   removeDiscoveredLightFromCache,
-  addLightToCache
+  addLightToCache,
 } from "common/graphqlUtils";
 
 const useAddLight = () => {
@@ -23,9 +23,9 @@ const useAddLight = () => {
     return addLight({
       variables: {
         lightId,
-        lightData
+        lightData,
       },
-      update: updateCache
+      update: updateCache,
     });
   };
 

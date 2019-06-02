@@ -17,9 +17,9 @@ const useRemoveLight = () => {
     return removeLight({
       variables: {
         lightId,
-        lightData
+        lightData,
       },
-      update: updateCache
+      update: updateCache,
     });
   };
 

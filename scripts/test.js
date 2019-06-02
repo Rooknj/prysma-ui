@@ -31,8 +31,8 @@ const result = spawn.sync("react-scripts", ["test", "--env=jsdom", ...argv], {
     PATH:
       process.env.PATH +
       delimiter +
-      pathResolve(process.cwd(), "node_modules", ".bin")
-  })
+      pathResolve(process.cwd(), "node_modules", ".bin"),
+  }),
 });
 
 if (result.status !== 0) {
