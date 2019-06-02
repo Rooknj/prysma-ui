@@ -15,7 +15,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  plugins: ["react"],
+  plugins: ["react", "jsx-a11y"],
   rules: {
     "no-console": "warn",
     "no-unused-vars": "warn",
