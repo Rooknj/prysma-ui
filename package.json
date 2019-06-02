@@ -34,6 +34,7 @@
     "build": "react-scripts build",
     "test": "node scripts/test",
     "lint": "eslint src/**/*.{js,jsx} --config=.eslintrc.js",
+    "reformat": "prettier '**/*.js' --write",
     "eject": "react-scripts eject"
   },
   "browserslist": {
