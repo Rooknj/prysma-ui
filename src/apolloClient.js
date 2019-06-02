@@ -49,11 +49,7 @@ const CACHE = new InMemoryCache();
 
 // Point appolo towards graphql server
 const client = new ApolloClient({
-  link: ApolloLink.from([
-    ON_ERROR_LINK,
-    //STATE_LINK,
-    HTTP_WS_LINK
-  ]),
+  link: ApolloLink.from([ON_ERROR_LINK, HTTP_WS_LINK]),
   cache: CACHE
 });
 
