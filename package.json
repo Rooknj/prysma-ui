@@ -3,6 +3,7 @@
   "version": "0.1.0-alpha",
   "private": true,
   "dependencies": {
+    "@jaames/iro": "^4.5.0",
     "@material-ui/core": "^4.0.1",
     "@material-ui/icons": "^4.0.1",
     "@material-ui/lab": "^4.0.0-alpha.14",
@@ -20,7 +21,9 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-apollo-hooks": "^0.4.5",
+    "react-color": "^2.17.3",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "styled-components": "^4.2.0",
     "subscriptions-transport-ws": "^0.9.16",

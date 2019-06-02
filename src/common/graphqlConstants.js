@@ -32,26 +32,33 @@ const LIGHT_STATE_FIELDS = gql`
   }
 `;
 
+// This needs LIGHT_STATE_FIELDS for some reason
 export const LIGHT_ADDED = gql`
   subscription lightAdded {
     lightAdded {
       ...lightFields
+      state {
+        ...lightStateFields
+      }
     }
   }
   ${LIGHT_FIELDS}
+  ${LIGHT_STATE_FIELDS}
 `;
 
+// This can not have LIGHT_STATE_FIELDS for some reason
 export const LIGHT_REMOVED = gql`
   subscription lightRemoved {
     lightRemoved {
       ...lightFields
     }
   }
+  ${LIGHT_FIELDS}
 `;
 
 export const LIGHT_CHANGED = gql`
   subscription lightChanged {
-    lightsChanged {
+    lightChanged {
       ...lightFields
     }
   }
@@ -64,6 +71,19 @@ export const LIGHT_STATE_CHANGED = gql`
       ...lightStateFields
     }
   }
+  ${LIGHT_STATE_FIELDS}
+`;
+
+export const LIGHT = gql`
+  query light($lightId: String!) {
+    light(lightId: $lightId) {
+      ...lightFields
+      state {
+        ...lightStateFields
+      }
+    }
+  }
+  ${LIGHT_FIELDS}
   ${LIGHT_STATE_FIELDS}
 `;
 
