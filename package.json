@@ -33,18 +33,8 @@
     "start": "node scripts/start",
     "build": "react-scripts build",
     "test": "node scripts/test",
+    "lint": "eslint src/**/*.{js,jsx} --config=.eslintrc.js",
     "eject": "react-scripts eject"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --write",
-      "git add"
-    ]
   },
   "browserslist": {
     "production": [
