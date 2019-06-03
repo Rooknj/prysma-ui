@@ -1,7 +1,8 @@
 import { useMutation } from "react-apollo-hooks";
 import { SET_LIGHT_STATE } from "common/graphqlConstants";
 import React from "react";
-import { throttle } from "lodash.throttle";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { throttle } from "lodash";
 
 const throttleSpeed = process.env.REACT_APP_ENV === "test" ? 0 : 500;
 
