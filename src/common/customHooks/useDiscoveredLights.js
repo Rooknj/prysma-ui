@@ -1,5 +1,5 @@
 import { useQuery } from "react-apollo-hooks";
-import { DISCOVERED_LIGHTS } from "common/graphqlConstants.js";
+import { DISCOVERED_LIGHTS } from "common/graphqlConstants";
 
 const useDiscoveredLights = () => {
   const QueryData = useQuery(DISCOVERED_LIGHTS, {

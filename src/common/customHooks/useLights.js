@@ -5,7 +5,7 @@ import {
   LIGHT_STATE_CHANGED,
   LIGHT_ADDED,
   LIGHT_REMOVED,
-} from "common/graphqlConstants.js";
+} from "common/graphqlConstants";
 import {
   removeDiscoveredLightFromCache,
   addLightToCache,

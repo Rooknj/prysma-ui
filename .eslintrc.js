@@ -42,9 +42,10 @@ module.exports = {
     "prefer-destructuring": "warn",
     radix: "off",
     "no-underscore-dangle": "off",
-    "prettier/prettier": "error",
+    "prettier/prettier": "off",
     // Project Specific Rules
     "import/no-unresolved": "off",
     "react/destructuring-assignment": "warn",
+    "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
   },
 };

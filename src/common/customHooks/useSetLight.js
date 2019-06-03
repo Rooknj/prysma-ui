@@ -1,7 +1,8 @@
 import { useMutation } from "react-apollo-hooks";
-import { SET_LIGHT } from "common/graphqlConstants.js";
+import { SET_LIGHT } from "common/graphqlConstants";
 import React from "react";
-import { throttle } from "lodash";
+import { throttle } from "lodash.throttle";
+
 const throttleSpeed = process.env.REACT_APP_ENV === "test" ? 0 : 500;
 
 const useSetLight = () => {

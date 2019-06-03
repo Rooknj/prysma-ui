@@ -1,16 +1,16 @@
 import { useMutation } from "react-apollo-hooks";
-import { REMOVE_LIGHT } from "common/graphqlConstants.js";
+import { REMOVE_LIGHT } from "common/graphqlConstants";
 import { removeLightFromCache } from "common/graphqlUtils";
 
 const useRemoveLight = () => {
   const removeLight = useMutation(REMOVE_LIGHT);
 
-  const updateCache = (cache, { data: { removeLight } }) => {
+  const updateCache = (cache, { data }) => {
     // If no data was returned, do nothing
-    if (!removeLight) return;
+    if (!data.removeLight) return;
 
     // Remove the added light from LIGHTS
-    removeLightFromCache(cache, removeLight);
+    removeLightFromCache(cache, data.removeLight);
   };
 
   const cacheUpdatingRemoveLight = (lightId, lightData) => {
