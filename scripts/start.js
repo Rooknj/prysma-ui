@@ -32,9 +32,6 @@ spawn.sync("react-scripts", ["start", ...argv], {
   stdio: ["ignore", "inherit", "inherit"],
   cwd: process.cwd(),
   env: Object.assign({}, process.env, {
-    PATH:
-      process.env.PATH +
-      delimiter +
-      pathResolve(process.cwd(), "node_modules", ".bin")
-  })
+    PATH: process.env.PATH + delimiter + pathResolve(process.cwd(), "node_modules", ".bin"),
+  }),
 });

@@ -1,20 +1,22 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+import customPropTypes from "common/customPropTypes";
 
-const AboutPage = props => {
-  const { match, location } = props;
-  console.log(match);
+const NotFoundPage = props => {
+  const { location } = props;
   return (
     <div>
-      <Link to={"/"}>
+      <Link to="/">
         <Typography variant="body1">{"< Back to main"}</Typography>
       </Link>
-      <Typography variant="h2">{`No Match For ${
-        location.pathname
-      }`}</Typography>
+      <Typography variant="h2">{`No Match For ${location.pathname}`}</Typography>
     </div>
   );
 };
 
-export default AboutPage;
+NotFoundPage.propTypes = {
+  location: customPropTypes.location.isRequired,
+};
+
+export default NotFoundPage;

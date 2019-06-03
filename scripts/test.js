@@ -28,11 +28,8 @@ const result = spawn.sync("react-scripts", ["test", "--env=jsdom", ...argv], {
   stdio: ["inherit", "inherit", "inherit"], // stdin, stdout, stderr. set to ignore to ignore
   cwd: process.cwd(),
   env: Object.assign({}, process.env, {
-    PATH:
-      process.env.PATH +
-      delimiter +
-      pathResolve(process.cwd(), "node_modules", ".bin")
-  })
+    PATH: process.env.PATH + delimiter + pathResolve(process.cwd(), "node_modules", ".bin"),
+  }),
 });
 
 if (result.status !== 0) {

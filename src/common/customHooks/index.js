@@ -13,5 +13,5 @@ export {
   useDiscoveredLights,
   useAddLight,
   useRemoveLight,
-  useLight
+  useLight,
 };

@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-console */
 // Apollo imports
 import { ApolloClient } from "apollo-client"; // Base Apollo
 import { InMemoryCache } from "apollo-cache-inmemory"; // Local Cache Storage
@@ -8,19 +10,19 @@ import { onError } from "apollo-link-error"; // Do custom logic when a GraphQL o
 import { getMainDefinition } from "apollo-utilities"; // Aids with splitting links
 
 const serverName = window.location.host;
-const ws_protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
 
 // Create an http link:
 const httpLink = new HttpLink({
-  uri: window.location.protocol + "//" + serverName + "/graphql"
+  uri: `${window.location.protocol}//${serverName}/graphql`,
 });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
-  uri: ws_protocol + "//" + serverName + "/graphql",
+  uri: `${wsProtocol}//${serverName}/graphql`,
   options: {
-    reconnect: true
-  }
+    reconnect: true,
+  },
 });
 
 // This link will handle sending out HTTP and WS requests
@@ -38,9 +40,7 @@ const HTTP_WS_LINK = split(
 const ON_ERROR_LINK = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.map(({ message, locations, path }) =>
-      console.error(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
+      console.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
     );
   if (networkError) console.error(`[Network error]: ${networkError}`);
 });
@@ -50,7 +50,7 @@ const CACHE = new InMemoryCache();
 // Point appolo towards graphql server
 const client = new ApolloClient({
   link: ApolloLink.from([ON_ERROR_LINK, HTTP_WS_LINK]),
-  cache: CACHE
+  cache: CACHE,
 });
 
 export default client;

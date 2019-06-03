@@ -47,11 +47,7 @@ const AddLightPage = () => {
       <Typography variant="h4">Add Light</Typography>
       <StyledDiv>
         <Button onClick={handleAddCustomLight}>Add</Button>
-        <TextField
-          placeholder="New Light ID"
-          value={newLight}
-          onChange={handleChange}
-        />
+        <TextField placeholder="New Light ID" value={newLight} onChange={handleChange} />
       </StyledDiv>
       <Typography variant="h6">Discovered Lights</Typography>
       {Body}

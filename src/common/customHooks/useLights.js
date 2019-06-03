@@ -4,18 +4,18 @@ import {
   LIGHT_CHANGED,
   LIGHT_STATE_CHANGED,
   LIGHT_ADDED,
-  LIGHT_REMOVED
-} from "common/graphqlConstants.js";
+  LIGHT_REMOVED,
+} from "common/graphqlConstants";
 import {
   removeDiscoveredLightFromCache,
   addLightToCache,
-  removeLightFromCache
+  removeLightFromCache,
 } from "common/graphqlUtils";
 
 const useLights = () => {
   const QueryData = useQuery(LIGHTS, {
     fetchPolicy: "cache-and-network",
-    notifyOnNetworkStatusChange: true
+    notifyOnNetworkStatusChange: true,
   });
 
   // This will automatically update the light in the cache when it gets a message
@@ -40,7 +40,7 @@ const useLights = () => {
 
       // Add the light to LIGHTS
       addLightToCache(client, lightAdded);
-    }
+    },
   });
 
   // This will automatically remove lights from the cache when it gets a message
@@ -55,7 +55,7 @@ const useLights = () => {
       if (!lightRemoved) return;
 
       removeLightFromCache(client, lightRemoved);
-    }
+    },
   });
 
   return QueryData;
