@@ -7,12 +7,13 @@ module.exports = {
     // Shared Configs
     "eslint:recommended",
     "plugin:eslint-comments/recommended",
+    "plugin:jest/recommended",
     // Project Specific Configs
     "react-app",
     "airbnb",
     // Make sure this is last
     "prettier",
-    "prettier/react"
+    "prettier/react",
   ],
   globals: {
     Atomics: "readonly",
@@ -29,6 +30,7 @@ module.exports = {
     // Shared Plugins
     "import",
     "prettier",
+    "jest",
     // Project Specific Plugins
     "react",
     "jsx-a11y",
