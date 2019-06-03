@@ -11,6 +11,7 @@ module.exports = {
     "airbnb",
     // Make sure this is last
     "prettier",
+    "prettier/react"
   ],
   globals: {
     Atomics: "readonly",
