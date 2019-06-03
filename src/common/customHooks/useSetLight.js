@@ -9,9 +9,7 @@ const useSetLight = () => {
 
   // Use a ref here to store the value of setLightState so that it doesn't change on rerenders.
   // This is necessary for lodash throttle to function properly
-  const { current: throttledSetLight } = React.useRef(
-    throttle(setLight, throttleSpeed)
-  );
+  const { current: throttledSetLight } = React.useRef(throttle(setLight, throttleSpeed));
 
   const easySetLight = (lightId, lightData) => {
     return throttledSetLight({

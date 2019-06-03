@@ -9,23 +9,13 @@ const useSetLightState = () => {
 
   // Use a ref here to store the value of setLightState so that it doesn't change on rerenders.
   // This is necessary for lodash throttle to function properly
-  const { current: throttledSetLightState } = React.useRef(
-    throttle(setLightState, throttleSpeed)
-  );
+  const { current: throttledSetLightState } = React.useRef(throttle(setLightState, throttleSpeed));
 
-  const optimisticSetLightState = (
-    lightId,
-    newLightState,
-    currentLightState = null
-  ) => {
+  const optimisticSetLightState = (lightId, newLightState, currentLightState = null) => {
     let optimisticResponse;
     // If the currentLightState is provided
     if (currentLightState && Object.entries(currentLightState).length === 0) {
-      const newColor = Object.assign(
-        {},
-        currentLightState.color,
-        newLightState.color
-      );
+      const newColor = Object.assign({}, currentLightState.color, newLightState.color);
       // Set up the optimistic response
       optimisticResponse = {
         __typename: "Mutation",

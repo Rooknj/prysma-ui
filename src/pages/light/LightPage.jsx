@@ -1,18 +1,14 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { Link, Redirect } from "react-router-dom";
-import {
-  useLight,
-  useSetLightState,
-  useRemoveLight,
-  useSetLight
-} from "common/customHooks";
+import { useLight, useSetLightState, useRemoveLight, useSetLight } from "common/customHooks";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Switch from "@material-ui/core/Switch";
 import Slider from "common/components/Slider";
 import CircleColorPicker from "common/components/CircleColorPicker";
+import customPropTypes from "common/customPropTypes";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -49,7 +45,7 @@ const LightPage = props => {
 
   const handleOnChange = currentLightState => e => {
     const newLightState = {
-      on: e.target.checked
+      on: e.target.checked,
     };
 
     setLightState(currentLightState.id, newLightState, currentLightState);
@@ -57,7 +53,7 @@ const LightPage = props => {
 
   const handleBrightnessChange = currentLightState => brightness => {
     const newLightState = {
-      brightness
+      brightness,
     };
 
     setLightState(currentLightState.id, newLightState, currentLightState);
@@ -66,7 +62,7 @@ const LightPage = props => {
   const handleColorChange = currentLightState => color => {
     const { r, g, b } = color.rgb;
     const newLightState = {
-      color: { r, g, b }
+      color: { r, g, b },
     };
 
     setLightState(currentLightState.id, newLightState, currentLightState);
@@ -74,7 +70,7 @@ const LightPage = props => {
 
   const handleEffectChange = (effect, currentLightState) => () => {
     const newLightState = {
-      effect
+      effect,
     };
 
     setLightState(currentLightState.id, newLightState, currentLightState);
@@ -82,7 +78,7 @@ const LightPage = props => {
 
   const handleSpeedChange = currentLightState => speed => {
     const newLightState = {
-      speed
+      speed,
     };
 
     setLightState(currentLightState.id, newLightState, currentLightState);
@@ -94,7 +90,7 @@ const LightPage = props => {
   } else if (error) {
     Body = <Typography variant="body1">Error.</Typography>;
   } else {
-    const light = data.light;
+    const { light } = data;
     const {
       id,
       name,
@@ -106,13 +102,13 @@ const LightPage = props => {
       version,
       hardware,
       colorOrder,
-      stripType
+      stripType,
     } = light;
     const { connected, on, brightness, color, effect, speed } = light.state;
     Body = (
       <div>
         <Typography variant="h3">{light.name}</Typography>
-        <Typography variant="h6">{"Rename the light: "}</Typography>
+        <Typography variant="h6">Rename the light: </Typography>
         <TextField
           placeholder="New Light Name"
           value={newName}
@@ -124,7 +120,7 @@ const LightPage = props => {
         </Button>
         <Typography variant="h6">{`Connected: ${connected}`}</Typography>
         <StyledDiv>
-          <Typography variant="h6">{"On: "}</Typography>
+          <Typography variant="h6">On: </Typography>
           <Switch
             checked={on}
             onChange={handleOnChange(light.state)}
@@ -132,7 +128,7 @@ const LightPage = props => {
             color="primary"
           />
         </StyledDiv>
-        <Typography variant="h6">{"Brightness: "}</Typography>
+        <Typography variant="h6">Brightness: </Typography>
         <Slider
           value={brightness}
           min={0}
@@ -142,7 +138,7 @@ const LightPage = props => {
           disabled={!connected}
           color="primary"
         />
-        <Typography variant="h6">{"Color: "}</Typography>
+        <Typography variant="h6">Color: </Typography>
         <CircleColorPicker
           color={color}
           onChange={handleColorChange(light)}
@@ -161,7 +157,7 @@ const LightPage = props => {
               {supportedEffect}
             </Button>
           ))}
-        <Typography variant="h6">{"Effect Speed:"}</Typography>
+        <Typography variant="h6">Effect Speed:</Typography>
         <Slider
           value={speed}
           min={1}
@@ -171,7 +167,7 @@ const LightPage = props => {
           color="primary"
           disabled={!connected}
         />
-        <Typography variant="h6">{"Config Info:"}</Typography>
+        <Typography variant="h6">Config Info:</Typography>
         <Typography variant="body1">{`ID: ${id}`}</Typography>
         <Typography variant="body1">{`Name: ${name}`}</Typography>
         <Typography variant="body1">{`IP Address: ${ipAddress}`}</Typography>
@@ -182,7 +178,7 @@ const LightPage = props => {
         <Typography variant="body1">{`Hardware: ${hardware}`}</Typography>
         <Typography variant="body1">{`Color Order: ${colorOrder}`}</Typography>
         <Typography variant="body1">{`Strip Type: ${stripType}`}</Typography>
-        <Typography variant="h6">{"Remove the light: "}</Typography>
+        <Typography variant="h6">Remove the light: </Typography>
         <Button onClick={handleRemoveLight} color="primary">
           Remove
         </Button>
@@ -193,12 +189,16 @@ const LightPage = props => {
 
   return (
     <div>
-      <Link to={"/"}>
+      <Link to="/">
         <Button>{"< Back"}</Button>
       </Link>
       {Body}
     </div>
   );
+};
+
+LightPage.propTypes = {
+  match: customPropTypes.match.isRequired,
 };
 
 export default LightPage;

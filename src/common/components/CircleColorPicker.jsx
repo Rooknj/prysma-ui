@@ -3,22 +3,6 @@ import PropTypes from "prop-types";
 import { CustomPicker } from "react-color";
 import iro from "@jaames/iro";
 
-const propTypes = {
-  color: PropTypes.shape({
-    r: PropTypes.number.isRequired,
-    g: PropTypes.number.isRequired,
-    b: PropTypes.number.isRequired
-  })
-};
-
-const defaultProps = {
-  color: {
-    r: 0,
-    g: 0,
-    b: 0
-  }
-};
-
 class CircleColorPicker extends React.Component {
   constructor(props) {
     super(props);
@@ -26,31 +10,35 @@ class CircleColorPicker extends React.Component {
   }
 
   componentDidMount() {
+    const { hex, height, width } = this.props;
     this.colorWheel = new iro.ColorPicker(this.myRef.current, {
-      color: this.props.hex,
-      height: this.props.height || 320,
-      width: this.props.width || 320
+      color: hex,
+      height: height || 320,
+      width: width || 320,
     });
     this.colorWheel.on("color:change", this.onIroChange);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { hex } = this.props;
+    return hex !== nextProps.hex;
+  }
+
+  componentDidUpdate(prevProps) {
+    const { hex } = this.props;
+    if (hex !== prevProps.hex) {
+      this.colorWheel.color.hexString = hex;
+    }
   }
 
   componentWillUnmount() {
     this.colorWheel.off("color:change", this.onIroChange);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.hex !== nextProps.hex;
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.hex !== prevProps.hex) {
-      this.colorWheel.color.hexString = this.props.hex;
-    }
-  }
-
   onIroChange = color => {
-    if (this.props.hex !== color.hexString) {
-      this.props.onChange(color.hexString);
+    const { hex, onChange } = this.props;
+    if (hex !== color.hexString) {
+      onChange(color.hexString);
     }
   };
 
@@ -58,7 +46,22 @@ class CircleColorPicker extends React.Component {
     return <div className="ColorWheel" ref={this.myRef} />;
   }
 }
-CircleColorPicker.propTypes = propTypes;
-CircleColorPicker.defaultProps = defaultProps;
+
+CircleColorPicker.propTypes = {
+  color: PropTypes.shape({
+    r: PropTypes.number.isRequired,
+    g: PropTypes.number.isRequired,
+    b: PropTypes.number.isRequired,
+  }).isRequired,
+  hex: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  height: PropTypes.number,
+  width: PropTypes.number,
+};
+
+CircleColorPicker.defaultProps = {
+  height: 320,
+  width: 320,
+};
 
 export default CustomPicker(CircleColorPicker);

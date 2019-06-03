@@ -1,4 +1,4 @@
-import { DISCOVERED_LIGHTS, LIGHTS } from "common/graphqlConstants.js";
+import { DISCOVERED_LIGHTS, LIGHTS } from "common/graphqlConstants";
 
 export const removeDiscoveredLightFromCache = (cache, lightToRemove) => {
   // Remove the added light from discoveredLights
@@ -14,9 +14,7 @@ export const removeDiscoveredLightFromCache = (cache, lightToRemove) => {
       cache.writeQuery({
         query: DISCOVERED_LIGHTS,
         data: {
-          discoveredLights: discoveredLights.filter(
-            light => light.id !== lightToRemove.id
-          ),
+          discoveredLights: discoveredLights.filter(light => light.id !== lightToRemove.id),
         },
       });
     }

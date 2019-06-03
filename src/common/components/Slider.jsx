@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Slider from "@material-ui/lab/Slider";
 import styled from "styled-components";
 
@@ -20,9 +21,16 @@ const SmoothSlider = props => {
     onChange(newValue);
   };
 
-  return (
-    <StyledSlider value={internalValue} onChange={handleChange} {...other} />
-  );
+  return <StyledSlider value={internalValue} onChange={handleChange} {...other} />;
+};
+
+SmoothSlider.propTypes = {
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func,
+};
+
+SmoothSlider.defaultProps = {
+  onChange: () => {},
 };
 
 export default SmoothSlider;

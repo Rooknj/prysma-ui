@@ -30,3 +30,7 @@ export const light = PropTypes.shape({
   stripType: PropTypes.string,
   state: lightState,
 });
+
+export const match = PropTypes.object;
+
+export const location = PropTypes.object;

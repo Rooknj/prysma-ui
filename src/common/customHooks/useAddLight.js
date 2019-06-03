@@ -1,9 +1,6 @@
 import { useMutation } from "react-apollo-hooks";
 import { ADD_LIGHT } from "common/graphqlConstants.js";
-import {
-  removeDiscoveredLightFromCache,
-  addLightToCache,
-} from "common/graphqlUtils";
+import { removeDiscoveredLightFromCache, addLightToCache } from "common/graphqlUtils";
 
 const useAddLight = () => {
   const addLight = useMutation(ADD_LIGHT);
