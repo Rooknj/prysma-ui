@@ -1,7 +1,9 @@
 import { useMutation } from "react-apollo-hooks";
-import { SET_LIGHT_STATE } from "common/graphqlConstants.js";
+import { SET_LIGHT_STATE } from "common/graphqlConstants";
 import React from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { throttle } from "lodash";
+
 const throttleSpeed = process.env.REACT_APP_ENV === "test" ? 0 : 500;
 
 const useSetLightState = () => {
@@ -9,23 +11,13 @@ const useSetLightState = () => {
 
   // Use a ref here to store the value of setLightState so that it doesn't change on rerenders.
   // This is necessary for lodash throttle to function properly
-  const { current: throttledSetLightState } = React.useRef(
-    throttle(setLightState, throttleSpeed)
-  );
+  const { current: throttledSetLightState } = React.useRef(throttle(setLightState, throttleSpeed));
 
-  const optimisticSetLightState = (
-    lightId,
-    newLightState,
-    currentLightState = null
-  ) => {
+  const optimisticSetLightState = (lightId, newLightState, currentLightState = null) => {
     let optimisticResponse;
     // If the currentLightState is provided
     if (currentLightState && Object.entries(currentLightState).length === 0) {
-      const newColor = Object.assign(
-        {},
-        currentLightState.color,
-        newLightState.color
-      );
+      const newColor = Object.assign({}, currentLightState.color, newLightState.color);
       // Set up the optimistic response
       optimisticResponse = {
         __typename: "Mutation",
@@ -33,17 +25,17 @@ const useSetLightState = () => {
           __typename: "LightState",
           ...currentLightState,
           ...newLightState,
-          color: newColor
-        }
+          color: newColor,
+        },
       };
     }
 
     return throttledSetLightState({
       variables: {
-        lightId: lightId,
-        lightState: newLightState
+        lightId,
+        lightState: newLightState,
       },
-      optimisticResponse
+      optimisticResponse,
     });
   };
 

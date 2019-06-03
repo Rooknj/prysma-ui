@@ -1,4 +1,4 @@
-import { DISCOVERED_LIGHTS, LIGHTS } from "common/graphqlConstants.js";
+import { DISCOVERED_LIGHTS, LIGHTS } from "common/graphqlConstants";
 
 export const removeDiscoveredLightFromCache = (cache, lightToRemove) => {
   // Remove the added light from discoveredLights
@@ -6,7 +6,7 @@ export const removeDiscoveredLightFromCache = (cache, lightToRemove) => {
     // Get the discovered lights in the cache
     // This might throw an error if the discoveredLights query hasnt been called yet
     const { discoveredLights } = cache.readQuery({
-      query: DISCOVERED_LIGHTS
+      query: DISCOVERED_LIGHTS,
     });
 
     if (discoveredLights.length > 0) {
@@ -14,10 +14,8 @@ export const removeDiscoveredLightFromCache = (cache, lightToRemove) => {
       cache.writeQuery({
         query: DISCOVERED_LIGHTS,
         data: {
-          discoveredLights: discoveredLights.filter(
-            light => light.id !== lightToRemove.id
-          )
-        }
+          discoveredLights: discoveredLights.filter(light => light.id !== lightToRemove.id),
+        },
       });
     }
   } catch (error) {
@@ -30,7 +28,7 @@ export const addLightToCache = (cache, lightToAdd) => {
   try {
     // Add the added light to GET_LIGHTS
     const { lights } = cache.readQuery({
-      query: LIGHTS
+      query: LIGHTS,
     });
 
     // If the light already exists, do nothing
@@ -39,7 +37,7 @@ export const addLightToCache = (cache, lightToAdd) => {
     // Write the light to the cache
     cache.writeQuery({
       query: LIGHTS,
-      data: { lights: lights.concat([lightToAdd]) }
+      data: { lights: lights.concat([lightToAdd]) },
     });
   } catch (error) {
     if (error.name === "Invariant Violation") return;
@@ -51,13 +49,13 @@ export const removeLightFromCache = (cache, lightToRemove) => {
   try {
     // Get the current lights in the cache
     const { lights } = cache.readQuery({
-      query: LIGHTS
+      query: LIGHTS,
     });
 
     // Remove the light from the cache
     cache.writeQuery({
       query: LIGHTS,
-      data: { lights: lights.filter(light => light.id !== lightToRemove.id) }
+      data: { lights: lights.filter(light => light.id !== lightToRemove.id) },
     });
   } catch (error) {
     if (error.name === "Invariant Violation") return;

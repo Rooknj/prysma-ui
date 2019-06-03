@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  useLights,
-  useSetLightState,
-  useRemoveLight
-} from "common/customHooks";
+import { useLights, useSetLightState, useRemoveLight } from "common/customHooks";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
@@ -26,7 +22,7 @@ const MainPage = () => {
 
   const handleStateChange = lightState => e => {
     const newLightState = {
-      on: e.target.checked
+      on: e.target.checked,
     };
 
     setLightState(lightState.id, newLightState, lightState);
