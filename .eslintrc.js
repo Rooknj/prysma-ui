@@ -6,6 +6,7 @@ module.exports = {
   extends: [
     // Shared Configs
     "eslint:recommended",
+    "plugin:eslint-comments/recommended",
     // Project Specific Configs
     "react-app",
     "airbnb",
