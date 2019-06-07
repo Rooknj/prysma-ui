@@ -4,7 +4,7 @@ export const removeDiscoveredLightFromCache = (cache, lightToRemove) => {
   // Remove the added light from discoveredLights
   try {
     // Get the discovered lights in the cache
-    // This might throw an error if the discoveredLights query hasnt been called yet
+    // This might throw an error if the discoveredLights query hasn't been called yet
     const { discoveredLights } = cache.readQuery({
       query: DISCOVERED_LIGHTS,
     });
@@ -20,7 +20,7 @@ export const removeDiscoveredLightFromCache = (cache, lightToRemove) => {
     }
   } catch (error) {
     if (error.name === "Invariant Violation") return;
-    console.error(error);
+    throw error;
   }
 };
 
@@ -41,7 +41,7 @@ export const addLightToCache = (cache, lightToAdd) => {
     });
   } catch (error) {
     if (error.name === "Invariant Violation") return;
-    console.error(error);
+    throw error;
   }
 };
 
@@ -59,6 +59,6 @@ export const removeLightFromCache = (cache, lightToRemove) => {
     });
   } catch (error) {
     if (error.name === "Invariant Violation") return;
-    console.error(error);
+    throw error;
   }
 };
