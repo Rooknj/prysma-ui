@@ -10,7 +10,7 @@ import {
   removeDiscoveredLightFromCache,
   addLightToCache,
   removeLightFromCache,
-} from "common/graphqlUtils";
+} from "common/graphqlHelpers";
 
 const useLights = () => {
   const QueryData = useQuery(LIGHTS, {
