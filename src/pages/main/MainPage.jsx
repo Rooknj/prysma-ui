@@ -1,32 +1,11 @@
 import React from "react";
-import { useLights, useSetLightState, useRemoveLight } from "common/customHooks";
+import { useLights } from "common/customHooks";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Switch from "@material-ui/core/Switch";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-
-const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-`;
+import LightList from "./LightList";
 
 const MainPage = () => {
   const { data, error, loading, networkStatus, refetch } = useLights();
-  const setLightState = useSetLightState();
-  const removeLight = useRemoveLight();
-
-  const handleRemoveLight = light => e => {
-    removeLight(light.id);
-  };
-
-  const handleStateChange = lightState => e => {
-    const newLightState = {
-      on: e.target.checked,
-    };
-
-    setLightState(lightState.id, newLightState, lightState);
-  };
 
   let Body;
   if (loading || networkStatus === 4) {
@@ -36,20 +15,11 @@ const MainPage = () => {
   } else if (!data.lights.length) {
     Body = <Typography variant="body1">None</Typography>;
   } else {
-    Body = data.lights.map(light => (
-      <StyledDiv key={light.id}>
-        <Button onClick={handleRemoveLight(light)}>Remove</Button>
-        <Switch
-          checked={light.state.on}
-          onChange={handleStateChange(light.state)}
-          disabled={!light.state.connected}
-          color="primary"
-        />
-        <Link to={`/light/${light.id}`}>
-          <Typography variant="body1">{light.name}</Typography>
-        </Link>
-      </StyledDiv>
-    ));
+    Body = (
+      <div>
+        <LightList lights={data.lights} />
+      </div>
+    );
   }
   return (
     <div>
