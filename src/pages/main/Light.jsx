@@ -4,9 +4,6 @@ import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import { DragHandle } from "common/reorderable";
-import DragIcon from "@material-ui/icons/DragIndicator";
-// import DragIcon from '@material-ui/icons/DragHandle';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -19,9 +16,6 @@ const Light = props => {
 
   return (
     <StyledDiv>
-      <DragHandle>
-        <DragIcon />
-      </DragHandle>
       <Button onClick={onRemove}>Remove</Button>
       <Switch
         checked={light.state.on}
