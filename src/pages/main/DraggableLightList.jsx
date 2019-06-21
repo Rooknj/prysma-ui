@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useSetLight } from "common/customHooks";
+import { useSetLight } from "common/customHooks";
 import update from "immutability-helper";
 import { sortableContainer } from "react-sortable-hoc";
 import DraggableLight from "./DraggableLight";
@@ -14,7 +14,6 @@ const calculateNewPosition = (newIndex, items) => {
   // Find the position of the item after where the current item is being inserted.
   // If it is inserted at the bottom, then the after position is null
   const afterPos = items.length > newIndex + 1 ? items[newIndex + 1].pos : null;
-  console.log(beforePos, afterPos);
 
   // Calculate the new position
   // If moved to the top, the position is half the position of the item after it
@@ -41,10 +40,9 @@ const DraggableLightList = props => {
   const [sortableLights, setSortableLights] = useState(
     lights.map((light, index) => Object.assign({}, light, { pos: (index + 1) * POSITION_SPACING }))
   );
-  // const setLight = useSetLight();
+  const setLight = useSetLight();
 
   const onSortEnd = ({ newIndex, oldIndex }) => {
-    console.log(`old: ${oldIndex}, new: ${newIndex}`);
     if (oldIndex !== newIndex) {
       // Move the light to it's new position within the state array
       const draggedItem = sortableLights[oldIndex];
@@ -54,8 +52,8 @@ const DraggableLightList = props => {
 
       // Calculate and set the light's new position
       const newPosition = calculateNewPosition(newIndex, newLights);
-      console.log("Setting Position to", newPosition);
       newLights[newIndex].pos = newPosition;
+      setLight(newLights[newIndex].id, { pos: newPosition });
       setSortableLights(newLights);
     }
   };
