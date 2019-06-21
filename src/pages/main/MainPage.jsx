@@ -1,31 +1,16 @@
-import React from "react";
-import { useLights, useSetLightState, useRemoveLight } from "common/customHooks";
+import React, { useState } from "react";
+import { useLights } from "common/customHooks";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Switch from "@material-ui/core/Switch";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-
-const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-`;
+import LightList from "./LightList";
+import DraggableLightList from "./DraggableLightList";
 
 const MainPage = () => {
   const { data, error, loading, networkStatus, refetch } = useLights();
-  const setLightState = useSetLightState();
-  const removeLight = useRemoveLight();
+  const [editMode, setEditMode] = useState(false);
 
-  const handleRemoveLight = light => e => {
-    removeLight(light.id);
-  };
-
-  const handleStateChange = lightState => e => {
-    const newLightState = {
-      on: e.target.checked,
-    };
-
-    setLightState(lightState.id, newLightState, lightState);
+  const handleToggleEditMode = () => {
+    setEditMode(!editMode);
   };
 
   let Body;
@@ -35,25 +20,15 @@ const MainPage = () => {
     Body = <Typography variant="body1">Error.</Typography>;
   } else if (!data.lights.length) {
     Body = <Typography variant="body1">None</Typography>;
+  } else if (editMode) {
+    Body = <DraggableLightList lights={data.lights} />;
   } else {
-    Body = data.lights.map(light => (
-      <StyledDiv key={light.id}>
-        <Button onClick={handleRemoveLight(light)}>Remove</Button>
-        <Switch
-          checked={light.state.on}
-          onChange={handleStateChange(light.state)}
-          disabled={!light.state.connected}
-          color="primary"
-        />
-        <Link to={`/light/${light.id}`}>
-          <Typography variant="body1">{light.name}</Typography>
-        </Link>
-      </StyledDiv>
-    ));
+    Body = <LightList lights={data.lights} />;
   }
   return (
     <div>
       <Typography variant="h4">Prysma</Typography>
+      <Button onClick={handleToggleEditMode}>{editMode ? "Done" : "Edit"}</Button>
       <Button onClick={() => refetch()}>Refetch</Button>
       <Typography variant="h6">Light List</Typography>
       {Body}
