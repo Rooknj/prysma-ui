@@ -4,29 +4,24 @@ import Typography from "@material-ui/core/Typography";
 import DragIcon from "@material-ui/icons/DragIndicator";
 import { sortableElement, sortableHandle } from "react-sortable-hoc";
 
-const DragHandle = sortableHandle(({ children }) => <span>{children}</span>);
-
-const DraggableItem = sortableElement(({ children }) => <div>{children}</div>);
+const DragHandle = sortableHandle(DragIcon);
 
 const StyledDiv = styled.div`
   display: flex;
   align-items: center;
   margin-left: 20px;
+  width: 400px;
 `;
 
 const DraggableLight = props => {
-  const { light, index } = props;
+  const { light } = props;
 
   return (
-    <DraggableItem index={index}>
-      <StyledDiv>
-        <DragHandle>
-          <DragIcon />
-        </DragHandle>
-        <Typography variant="body1">{light.name}</Typography>
-      </StyledDiv>
-    </DraggableItem>
+    <StyledDiv>
+      <DragHandle />
+      <Typography variant="body1">{`${light.name} - pos: ${light.pos}`}</Typography>
+    </StyledDiv>
   );
 };
 
-export default DraggableLight;
+export default sortableElement(DraggableLight);
