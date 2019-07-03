@@ -38,6 +38,7 @@
     "@types/node": "^12.0.10",
     "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.4",
     "@types/styled-components": "^4.1.16",
     "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",
@@ -75,6 +76,7 @@
     "react": "^16.8.6",
     "react-apollo-hooks": "^0.4.5",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
     "styled-components": "^4.3.2",
     "subscriptions-transport-ws": "^0.9.16",
     "typeface-roboto": "^0.0.54"
