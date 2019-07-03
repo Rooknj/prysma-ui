@@ -1,6 +1,6 @@
 import React from "react";
 
 // TODO: Implement
-const Light = (): JSX.Element => <div>Light</div>;
+const Light: React.FC<{}> = (): React.FunctionComponentElement<{}> => <div>Light</div>;
 
 export default Light;

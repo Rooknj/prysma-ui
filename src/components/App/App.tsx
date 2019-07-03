@@ -17,7 +17,7 @@ import Home from "screens/Home";
 
 const theme = createMuiTheme();
 
-const App = (): JSX.Element => (
+const App: React.FC<{}> = (): React.FunctionComponentElement<{}> => (
   <ApolloProvider client={client}>
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
@@ -31,18 +31,15 @@ const App = (): JSX.Element => (
             </Tabs>
           </AppBar>
           <Switch>
-            {/* The switch uses the first route that matches instead of using multiple */}
             <Route path="/" exact component={Home} />
             <Route path="/about/" exact component={About} />
             <Route path="/addLight/" exact component={AddLight} />
             <Route path="/light/:id" exact component={Light} />
             <Route component={NotFound} />
           </Switch>
-          {/* Put any modals/things that can show up over pages that you want routed outside the switch */}
         </Router>
       </ThemeProvider>
     </StylesProvider>
   </ApolloProvider>
 );
-
 export default App;

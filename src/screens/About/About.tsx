@@ -1,6 +1,6 @@
 import React from "react";
 
 // TODO: Implement
-const About = (): JSX.Element => <div>About</div>;
+const About: React.FC<{}> = (): React.FunctionComponentElement<{}> => <div>About</div>;
 
 export default About;
