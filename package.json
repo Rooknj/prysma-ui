@@ -1,0 +1,66 @@
+{
+  "name": "prysma-ui",
+  "version": "0.1.0-alpha",
+  "description": "UI for Prysma LED control",
+  "main": "index.js",
+  "repository": "https://github.com/Rooknj/prysma-ui.git",
+  "author": "Nick Rook <Nick_Rook@intuit.com>",
+  "license": "MIT",
+  "private": true,
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "scripts": {
+    "start": "ts-node --project scripts/tsconfig.json scripts/start",
+    "build": "react-scripts build",
+    "build:ts": "tsc",
+    "test": "ts-node --project scripts/tsconfig.json scripts/test",
+    "lint": "eslint 'src/**/*.{ts,tsx,json,md}' --config=.eslintrc.js",
+    "reformat": "prettier 'src/**/*.{js,ts,tsx,json,md}' --write",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/cross-spawn": "^6.0.0",
+    "@types/graphql": "^14.2.1",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.10",
+    "@types/react": "^16.8.22",
+    "@types/react-dom": "^16.8.4",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "cross-spawn": "^6.0.5",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-plugin-eslint-comments": "^3.1.1",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2",
+    "react-scripts": "^3.0.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "typeface-roboto": "^0.0.54"
+  }
+}
