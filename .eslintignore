@@ -1,5 +1,6 @@
 serviceWorker.js
 react-app-env.d.ts
+/src/generated
 
 /build
 /coverage
