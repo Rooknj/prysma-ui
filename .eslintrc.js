@@ -63,6 +63,12 @@ module.exports = {
     "prettier/prettier": "off",
     "import/prefer-default-export": "off",
     "class-methods-use-this": "off",
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        allowSingleExtends: true,
+      },
+    ],
     // Project Specific Rules
     "react/destructuring-assignment": "warn",
     "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx", ".ts", ".tsx"] }],

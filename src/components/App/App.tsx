@@ -17,7 +17,7 @@ import Home from "screens/Home";
 
 const theme = createMuiTheme();
 
-const App: React.FC<{}> = (): React.FunctionComponentElement<{}> => (
+const App = (): React.FunctionComponentElement<{}> => (
   <ApolloProvider client={client}>
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
