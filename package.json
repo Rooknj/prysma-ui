@@ -26,12 +26,14 @@
     "test": "ts-node --project scripts/tsconfig.json scripts/test",
     "lint": "eslint 'src/**/*.{ts,tsx,json,md}' --config=.eslintrc.js",
     "reformat": "prettier 'src/**/*.{js,ts,tsx,json,md}' --write",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate": "graphql-codegen"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
+    "@graphql-codegen/cli": "^1.3.1",
     "@types/cross-spawn": "^6.0.0",
     "@types/graphql": "^14.2.1",
     "@types/jest": "^24.0.15",
