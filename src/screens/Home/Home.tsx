@@ -18,6 +18,7 @@ const StyledDiv = styled.div`
 `;
 
 const Home = (): React.FunctionComponentElement<{}> => {
+  // TODO: Add Subscriptions
   const { data, error, loading, networkStatus, refetch } = useLightsQuery();
   const removeLight = useRemoveLightMutation();
   const setLight = useSetLightMutation();
