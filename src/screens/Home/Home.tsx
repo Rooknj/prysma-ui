@@ -19,7 +19,12 @@ const StyledDiv = styled.div`
 
 const Home = (): React.FunctionComponentElement<{}> => {
   // TODO: Add Subscriptions
+  /**
+   * Note: The cache-first behavior of this query will make it so that the list won't update after
+   * adding a light on another page if you have dev-tools open and the disable-cache checkbox checked
+   */
   const { data, error, loading, networkStatus, refetch } = useLightsQuery();
+
   const removeLight = useRemoveLightMutation();
   const setLight = useSetLightMutation();
 
