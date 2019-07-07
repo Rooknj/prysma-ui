@@ -1,20 +1,10 @@
 module.exports = {
+  parser: "@typescript-eslint/parser", // Specifies the ESLint parser
   env: {
     browser: true,
     es6: true,
+    jest: true,
   },
-  extends: [
-    // Shared Configs
-    "eslint:recommended",
-    "plugin:eslint-comments/recommended",
-    "plugin:jest/recommended",
-    // Project Specific Configs
-    "react-app",
-    "airbnb",
-    // Make sure this is last
-    "prettier",
-    "prettier/react",
-  ],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
@@ -22,10 +12,38 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      tsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: "module",
+    sourceType: "module", // Allows for the use of imports
   },
+  settings: {
+    // This section is needed to get imports working with Typescript. Might be unnecessary later
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        paths: ["src"],
+      },
+    },
+  },
+  extends: [
+    // Shared Configs
+    "eslint:recommended",
+    "plugin:eslint-comments/recommended",
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    // Project Specific Configs
+    "react-app",
+    "airbnb",
+    // Make sure this is last
+    "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    "prettier/react",
+    "plugin:prettier/recommended",
+  ],
   plugins: [
     // Shared Plugins
     "import",
@@ -43,9 +61,16 @@ module.exports = {
     radix: "off",
     "no-underscore-dangle": "off",
     "prettier/prettier": "off",
+    "import/prefer-default-export": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        allowSingleExtends: true,
+      },
+    ],
     // Project Specific Rules
-    "import/no-unresolved": "off",
     "react/destructuring-assignment": "warn",
-    "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
+    "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
   },
 };
