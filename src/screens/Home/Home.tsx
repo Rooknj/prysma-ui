@@ -4,13 +4,9 @@ import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {
-  useLightsQuery,
-  useRemoveLightMutation,
-  Light,
-  useSetLightMutation,
-} from "generated/graphql";
+import { useRemoveLightMutation, Light, useSetLightMutation } from "generated/graphql";
 import { removeLightFromCache } from "lib/graphqlHelpers";
+import { useLightsQueryWithSubscriptions } from "lib/hooks";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -18,12 +14,7 @@ const StyledDiv = styled.div`
 `;
 
 const Home = (): React.FunctionComponentElement<{}> => {
-  // TODO: Add Subscriptions
-  /**
-   * Note: The cache-first behavior of this query will make it so that the list won't update after
-   * adding a light on another page if you have dev-tools open and the disable-cache checkbox checked
-   */
-  const { data, error, loading, networkStatus, refetch } = useLightsQuery();
+  const { data, error, loading, networkStatus, refetch } = useLightsQueryWithSubscriptions();
 
   const removeLight = useRemoveLightMutation();
   const setLight = useSetLightMutation();
