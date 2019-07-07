@@ -9,7 +9,7 @@ import Switch from "@material-ui/core/Switch";
 import Slider from "components/SmoothSlider";
 import { useLightQueryWithSubscriptions, useThrottledSetLightMutation } from "lib/hooks";
 import { removeLightFromCache } from "lib/graphqlHelpers";
-// import CircleColorPicker from "common/components/CircleColorPicker";
+import CircleColorPicker from "components/CircleColorPicker";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -96,7 +96,21 @@ const Light = (
     });
   };
 
-  // const handleColorChange = (): void => console.log("rename")
+  const handleColorChange = (currentLight: LightEntity): ((value: string) => void) => (
+    color
+  ): void => {
+    setLight({
+      variables: { id: currentLight.id, lightData: { color } },
+      optimisticResponse: {
+        __typename: "Mutation",
+        setLight: {
+          __typename: "Light",
+          ...currentLight,
+          ...{ color },
+        },
+      },
+    });
+  };
 
   const handleEffectChange = (
     effect: string,
@@ -185,12 +199,7 @@ const Light = (
           valueLabelDisplay="auto"
         />
         <Typography variant="h6">Color: </Typography>
-        {/* <CircleColorPicker
-          color={light.color}
-          onChange={handleColorChange(light)}
-          height={320}
-          width={320}
-        /> */}
+        <CircleColorPicker color={light.color} onChange={handleColorChange(light)} width={320} />
         <Typography variant="h6">{`Current Effect: ${light.effect}`}</Typography>
         {light.supportedEffects &&
           light.supportedEffects.map(
