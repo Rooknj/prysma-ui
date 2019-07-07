@@ -6,24 +6,17 @@ import {
   useLightAddedSubscription,
   useLightRemovedSubscription,
 } from "generated/graphql";
-import { QueryHookResult } from "react-apollo-hooks";
+import { QueryHookResult, QueryHookOptions } from "react-apollo-hooks";
 import {
   removeDiscoveredLightFromCache,
   addLightToCache,
   removeLightFromCache,
 } from "lib/graphqlHelpers";
 
-export const useLightsQueryWithSubscriptions = (): QueryHookResult<
-  LightsQuery,
-  LightsQueryVariables
-> => {
-  // TODO: Figure out how to include cache-and-network without ts-ignore
-  // We use cache-and-network
-  // @ts-ignore
-  const QueryData = useLightsQuery({
-    fetchPolicy: "cache-and-network",
-    notifyOnNetworkStatusChange: true,
-  });
+export const useLightsQueryWithSubscriptions = (
+  queryOptions?: QueryHookOptions<LightsQueryVariables, object>
+): QueryHookResult<LightsQuery, LightsQueryVariables> => {
+  const QueryData = useLightsQuery(queryOptions);
 
   // This will automatically update the light in the cache when it gets a message
   useLightChangedSubscription();

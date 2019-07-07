@@ -14,7 +14,13 @@ const StyledDiv = styled.div`
 `;
 
 const Home = (): React.FunctionComponentElement<{}> => {
-  const { data, error, loading, networkStatus, refetch } = useLightsQueryWithSubscriptions();
+  // TODO: Figure out how to include cache-and-network without ts-ignore
+  // We use cache-and-network
+  // @ts-ignore
+  const { data, error, loading, networkStatus, refetch } = useLightsQueryWithSubscriptions({
+    fetchPolicy: "cache-and-network",
+    notifyOnNetworkStatusChange: true,
+  });
 
   const removeLight = useRemoveLightMutation();
   const setLight = useSetLightMutation();
