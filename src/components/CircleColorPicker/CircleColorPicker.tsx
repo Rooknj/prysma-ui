@@ -35,7 +35,6 @@ const CircleColorPicker = (
   // Reassign the onChange function if it changes
   useEffect((): (() => void) => {
     const test = ({ hexString }: iro.Color): void => {
-      console.log("onChange");
       // hexString from iro.js is always lowercase but the API should always return uppercase
       onChange(hexString.toUpperCase());
     };
@@ -61,7 +60,6 @@ const CircleColorPicker = (
     if (iroColorPicker.current.color.hexString === color.toLowerCase()) {
       return;
     }
-    console.log("diff color");
     iroColorPicker.current.color.hexString = color.toLowerCase();
   }, [color]);
 
