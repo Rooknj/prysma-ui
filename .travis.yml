@@ -1,17 +1,18 @@
 language: node_js
-node_js: "stable"
-sudo: required
+node_js: 10
 cache: yarn
 script:
-  - yarn test --no-watch
-  - yarn build
-# Or use SemanticRelease instead of this
-# https://docs.travis-ci.com/user/deployment/releases/ Deploy to github releases
-# deploy:
-#   provider: releases
-#   api_key: "GITHUB OAUTH TOKEN"
-#   file: "FILE TO UPLOAD"
-#   skip_cleanup: true
-#   draft: true # Lets you make draft releases and not real ones
-#   on:
-#     tags: true
+- commitlint-travis
+- yarn lint
+- yarn test
+- yarn build
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+  - npx semantic-release
+  on:
+    branch: master
+notifications:
+  slack:
+    secure: WncvdWeNwxC9a4In46wcXRIHkcac76ZwRT9L/vNTMQOp3gZYXcQCp+r2Sal9fY5MkjB0CT+N95+fNLeDkXTEwWy5YkaaHrAKZ5Gtbc8q4jg9GG/FM182hvM7fPSeiWG6YnS2M3SHoZwGVFZSP9daIeibwOQS7R8nFTIfBRF7TejahriyEGVKhb/u65aJp/Fgpzaknz5CdEzMi6J8v4DoN8f0gsMXPw2bD7v8eP5r0YfOu6yBrqzvoGhwzqAG0NHX01eoMSXe5IIANyN0oZVpdprco9e7WFMZs8EEPSgiP+JoIakliAOqLbzS3x8zFtIN60A3M/piDfeuu8gLYMzC5LVAykYo3gwKHsz8q+prYAGkBwsaZzzciNZdCBLHjoj9oUcehBvcQ/N1XeQjMjGk7U1BDOyibqpLeDHFiqnu46/28hpJb3ntoW1xz0D1FOp0TbenPpGV2uGuXm8+Y1sEEBnLlEONlYMr+D1uvFCeCXoDtjcWTKCEkJpTEHVnV6HyjLkgPi1HLzW/ovGwGTcdcUy6vQO3d0DMI6MnHjlZkQ5t5sTQN9KKpN2qC5QQByZvP6ynhaDXeidQVVD6nBptBPd0cvTCa69sGddCgEX8I59LnbrKksFnjZyLpMO41navsvYowl+PKmpBeMkATWcDZJwbsDH0UyKZqh73AQt59Sc=

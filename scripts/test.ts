@@ -1,7 +1,7 @@
 /* eslint no-console:0 */
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
-import spawn from "cross-spawn";
-import { delimiter, resolve as pathResolve } from "path";
+import { argv } from "yargs";
+import execa from "execa";
 
 process.env.REACT_APP_ENV = "test";
 
@@ -10,25 +10,15 @@ process.on("unhandledRejection", (err): never => {
   throw err;
 });
 
-let argv = process.argv.slice(2);
+const jestArgs = process.argv.slice(2);
 
-// Watch unless on CI or in coverage mode
-if (argv.indexOf("--no-watch") >= 0) {
-  // Remove --no-watch from argv
-  argv = argv.filter((arg): boolean => arg !== "--no-watch");
-
-  // Set the env variable to not watch files
+// Don't watch (set CI flag to true) if --no-watch was specified
+if ("watch" in argv && !argv.watch) {
   process.env.CI = "true";
+  jestArgs.splice(jestArgs.indexOf("--no-watch"), 1); // Remove no-watch option from argv so jest doesn't screw up
 }
 
-const result = spawn.sync("react-scripts", ["test", "--env=jsdom", ...argv], {
-  stdio: ["inherit", "inherit", "inherit"], // stdin, stdout, stderr. set to ignore to ignore
-  cwd: process.cwd(),
-  env: Object.assign({}, process.env, {
-    PATH: process.env.PATH + delimiter + pathResolve(process.cwd(), "node_modules", ".bin"),
-  }),
+execa.sync("react-scripts", ["test", "--env=jsdom", ...jestArgs], {
+  stdio: "inherit",
+  preferLocal: true,
 });
-
-if (result.status !== 0) {
-  process.exit(result.status || 1);
-}

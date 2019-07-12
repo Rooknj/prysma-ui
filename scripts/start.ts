@@ -1,7 +1,7 @@
 /* eslint no-console:0 */
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
-import spawn from "cross-spawn";
-import { delimiter, resolve as pathResolve } from "path";
+import { argv } from "yargs";
+import execa from "execa";
 
 process.env.REACT_APP_ENV = "development";
 
@@ -10,11 +10,11 @@ process.on("unhandledRejection", (err): never => {
   throw err;
 });
 
-let argv = process.argv.slice(2);
+const startArgs = process.argv.slice(2);
 
-if (argv.indexOf("--local") >= 0) {
+if (argv.local) {
   // Remove --local from argv
-  argv = argv.filter((arg): boolean => arg !== "--local");
+  startArgs.splice(startArgs.indexOf("--local"), 1);
 
   // Set the env variable to use the local server
   console.log("Using Server at http://localhost:4001");
@@ -24,10 +24,7 @@ if (argv.indexOf("--local") >= 0) {
   console.log("Using Server at http://prysma.local");
 }
 
-spawn.sync("react-scripts", ["start", ...argv], {
-  stdio: ["ignore", "inherit", "inherit"],
-  cwd: process.cwd(),
-  env: Object.assign({}, process.env, {
-    PATH: process.env.PATH + delimiter + pathResolve(process.cwd(), "node_modules", ".bin"),
-  }),
+execa.sync("react-scripts", ["start", ...startArgs], {
+  stdio: "inherit",
+  preferLocal: true,
 });
