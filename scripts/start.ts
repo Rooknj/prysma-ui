@@ -14,7 +14,7 @@ const startArgs = process.argv.slice(2);
 
 if (argv.local) {
   // Remove --local from argv
-  argv = argv.filter((arg): boolean => arg !== "--local");
+  startArgs.splice(startArgs.indexOf("--local"), 1);
 
   // Set the env variable to use the local server
   console.log("Using Server at http://localhost:4001");
