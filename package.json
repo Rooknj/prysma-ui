@@ -1,6 +1,6 @@
 {
   "name": "prysma-ui",
-  "version": "0.1.0-alpha",
+  "version": "0.0.0-development",
   "description": "UI for Prysma LED control",
   "main": "index.js",
   "repository": "https://github.com/Rooknj/prysma-ui.git",
