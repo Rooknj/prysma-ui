@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import Slider, { SliderProps } from "@material-ui/lab/Slider";
+import Slider, { SliderProps } from "@material-ui/core/Slider";
 import styled from "styled-components";
 import { isArray } from "util";
 
