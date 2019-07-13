@@ -15,6 +15,18 @@ const StyledDiv = styled.div`
   display: flex;
   align-items: center;
 `;
+
+const StyledSlider = styled(Slider)`
+  width: 85%;
+  max-width: 400px;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+`;
+
+const EffectsDiv = styled.div`
+  max-width: 400px;
+`;
+
 interface MatchParams {
   id: string;
 }
@@ -187,8 +199,8 @@ const Light = (
             color="primary"
           />
         </StyledDiv>
-        <Typography variant="h6">Brightness: </Typography>
-        <Slider
+        <Typography variant="h6">Brightness:</Typography>
+        <StyledSlider
           value={light.brightness}
           min={0}
           max={100}
@@ -198,24 +210,27 @@ const Light = (
           color="primary"
           valueLabelDisplay="auto"
         />
+
         <Typography variant="h6">Color: </Typography>
         <CircleColorPicker color={light.color} onChange={handleColorChange(light)} width={320} />
         <Typography variant="h6">{`Current Effect: ${light.effect}`}</Typography>
-        {light.supportedEffects &&
-          light.supportedEffects.map(
-            (supportedEffect): React.FunctionComponentElement<{}> => (
-              <Button
-                key={supportedEffect}
-                disabled={!light.connected}
-                color="primary"
-                onClick={handleEffectChange(supportedEffect, light)}
-              >
-                {supportedEffect}
-              </Button>
-            )
-          )}
+        <EffectsDiv>
+          {light.supportedEffects &&
+            light.supportedEffects.map(
+              (supportedEffect): React.FunctionComponentElement<{}> => (
+                <Button
+                  key={supportedEffect}
+                  disabled={!light.connected}
+                  color="primary"
+                  onClick={handleEffectChange(supportedEffect, light)}
+                >
+                  {supportedEffect}
+                </Button>
+              )
+            )}
+        </EffectsDiv>
         <Typography variant="h6">Effect Speed:</Typography>
-        <Slider
+        <StyledSlider
           value={light.speed}
           min={1}
           max={7}

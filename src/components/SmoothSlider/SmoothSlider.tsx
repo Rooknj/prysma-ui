@@ -1,12 +1,6 @@
 import React, { ChangeEvent } from "react";
 import Slider, { SliderProps } from "@material-ui/core/Slider";
-import styled from "styled-components";
 import { isArray } from "util";
-
-const StyledSlider = styled(Slider)`
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-`;
 
 interface SmoothSliderProps extends Omit<SliderProps, "value" | "onChange"> {
   value: number;
@@ -30,7 +24,7 @@ const SmoothSlider = (
     onChange(newValue);
   };
 
-  return <StyledSlider value={internalValue} onChange={handleChange} {...other} />;
+  return <Slider value={internalValue} onChange={handleChange} {...other} />;
 };
 
 SmoothSlider.defaultProps = {
