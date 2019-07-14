@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# remove files from linguist statistics
+*.js linguist-language=TypeScript
+src/setupProxy.js linguist-language=TypeScript
