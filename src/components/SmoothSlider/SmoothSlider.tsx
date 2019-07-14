@@ -20,6 +20,7 @@ const SmoothSlider = (
 
   const handleChange = (_: ChangeEvent<{}>, newValue: number | number[]): void => {
     if (isArray(newValue)) return;
+    if (internalValue === newValue) return;
     setInternalValue(newValue);
     onChange(newValue);
   };

@@ -27,6 +27,10 @@ const EffectsDiv = styled.div`
   max-width: 400px;
 `;
 
+const OffsetColorDiv = styled.div`
+  margin-left: 1rem;
+`;
+
 interface MatchParams {
   id: string;
 }
@@ -212,7 +216,9 @@ const Light = (
         />
 
         <Typography variant="h6">Color: </Typography>
-        <CircleColorPicker color={light.color} onChange={handleColorChange(light)} width={320} />
+        <OffsetColorDiv>
+          <CircleColorPicker color={light.color} onChange={handleColorChange(light)} width={320} />
+        </OffsetColorDiv>
         <Typography variant="h6">{`Current Effect: ${light.effect}`}</Typography>
         <EffectsDiv>
           {light.supportedEffects &&
