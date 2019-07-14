@@ -22,7 +22,7 @@
   "scripts": {
     "start": "ts-node --project scripts/tsconfig.json scripts/start",
     "build": "react-scripts build",
-    "build:ts": "tsc",
+    "compress": "zip -r ui.zip build && tar -zcvf ui.tar.gz build",
     "test": "ts-node --project scripts/tsconfig.json scripts/test",
     "lint": "eslint 'src/**/*.{ts,tsx,json,md}' --config=.eslintrc.js",
     "reformat": "prettier './**/*.{js,ts,tsx,json,md}' --write",

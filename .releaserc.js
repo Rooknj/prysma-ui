@@ -14,7 +14,10 @@ module.exports = {
     [
       "@semantic-release/github",
       {
-        assets: [{ path: "build", name: "ui", label: "Production App Bundle" }],
+        assets: [
+          { path: "ui.zip", label: "Production App Bundle (zip)" },
+          { path: "ui.tar.gz", label: "Production App Bundle (tar.gz)" },
+        ],
       },
     ],
   ],
