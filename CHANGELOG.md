@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/Rooknj/prysma-ui/compare/v1.0.1...v1.0.2) (2019-07-14)
+
+
+### Bug Fixes
+
+* **ci:** fixed deploy script ([0c9fa42](https://github.com/Rooknj/prysma-ui/commit/0c9fa42))
+* **ci:** release zipped assets ([2e1c050](https://github.com/Rooknj/prysma-ui/commit/2e1c050))
+
 ## [1.0.1](https://github.com/Rooknj/prysma-ui/compare/v1.0.0...v1.0.1) (2019-07-14)
 
 
