@@ -217,7 +217,12 @@ const Light = (
 
         <Typography variant="h6">Color: </Typography>
         <OffsetColorDiv>
-          <CircleColorPicker color={light.color} onChange={handleColorChange(light)} width={320} />
+          <CircleColorPicker
+            color={light.color}
+            onChange={handleColorChange(light)}
+            width={320}
+            disabled={!light.connected}
+          />
         </OffsetColorDiv>
         <Typography variant="h6">{`Current Effect: ${light.effect}`}</Typography>
         <EffectsDiv>
