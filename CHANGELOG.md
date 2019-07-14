@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Rooknj/prysma-ui/compare/v1.0.0...v1.0.1) (2019-07-14)
+
+
+### Bug Fixes
+
+* properly disabled color picker on disconnect ([48ce21c](https://github.com/Rooknj/prysma-ui/commit/48ce21c))
+
 # 1.0.0 (2019-07-14)
 
 
