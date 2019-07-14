@@ -12,7 +12,7 @@ const CircleColorPicker = (
 ): React.FunctionComponentElement<CircleColorPickerProps> => {
   const { onChange, color, width } = props;
 
-  const [inUse, setInUse] = React.useState(false);
+  const inUseRef = useRef<boolean>(false);
   const colorPickerEl = useRef<HTMLDivElement>(null);
   const iroColorPicker = useRef<iro.ColorPicker | null>(null);
 
@@ -31,8 +31,12 @@ const CircleColorPicker = (
         },
       ],
     });
-    iroColorPicker.current.on("input:start", (): void => setInUse(true));
-    iroColorPicker.current.on("input:end", (): void => setInUse(false));
+    iroColorPicker.current.on("input:start", (): void => {
+      inUseRef.current = true;
+    });
+    iroColorPicker.current.on("input:end", (): void => {
+      inUseRef.current = false;
+    });
   }, []);
 
   // Reassign the onChange function if it changes
@@ -63,14 +67,10 @@ const CircleColorPicker = (
     if (iroColorPicker.current.color.hexString === color.toLowerCase()) {
       return;
     }
-    if (inUse) {
+    if (inUseRef.current) {
       return;
     }
     iroColorPicker.current.color.hexString = color.toLowerCase();
-
-    // We are not including inUse in the dependencies array because we do not want this effect to be triggered when inUse changes
-    // We only want this effect to be triggered on a color change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [color]);
 
   // Resize the colorpicker if the width prop changes

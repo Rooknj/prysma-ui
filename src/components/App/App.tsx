@@ -24,7 +24,7 @@ const App = (): React.FunctionComponentElement<{}> => (
         <Router>
           <CssBaseline />
           <AppBar position="static">
-            <Tabs value={0}>
+            <Tabs value={false}>
               <Tab label="Home" component={Link} to="/" />
               <Tab label="Add Light" component={Link} to="/addLight/" />
               <Tab label="About" component={Link} to="/about/" />

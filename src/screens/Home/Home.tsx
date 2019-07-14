@@ -54,7 +54,16 @@ const Home = (): React.FunctionComponentElement<{}> => {
     });
   };
 
-  const handleRefetch = (): unknown => refetch();
+  const handleRefetch = async (): Promise<void> => {
+    // TODO: Remove this once react-apollo comes out with native hooks
+    if (error) {
+      // Temporary fix to force a refresh when an error occurs
+      // The current behavior is that refetch will not rerender the component if a graphql error was returned
+      window.location.reload();
+    } else {
+      refetch();
+    }
+  };
 
   let Body;
   if (loading || networkStatus === 4) {

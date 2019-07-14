@@ -1,12 +1,6 @@
 import React, { ChangeEvent } from "react";
-import Slider, { SliderProps } from "@material-ui/lab/Slider";
-import styled from "styled-components";
+import Slider, { SliderProps } from "@material-ui/core/Slider";
 import { isArray } from "util";
-
-const StyledSlider = styled(Slider)`
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-`;
 
 interface SmoothSliderProps extends Omit<SliderProps, "value" | "onChange"> {
   value: number;
@@ -26,11 +20,12 @@ const SmoothSlider = (
 
   const handleChange = (_: ChangeEvent<{}>, newValue: number | number[]): void => {
     if (isArray(newValue)) return;
+    if (internalValue === newValue) return;
     setInternalValue(newValue);
     onChange(newValue);
   };
 
-  return <StyledSlider value={internalValue} onChange={handleChange} {...other} />;
+  return <Slider value={internalValue} onChange={handleChange} {...other} />;
 };
 
 SmoothSlider.defaultProps = {
