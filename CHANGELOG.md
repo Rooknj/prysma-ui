@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Rooknj/prysma-ui/compare/v1.0.2...v1.0.3) (2019-07-15)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency @material-ui/styles to 4.2.0 ([552b64e](https://github.com/Rooknj/prysma-ui/commit/552b64e))
+
 ## [1.0.2](https://github.com/Rooknj/prysma-ui/compare/v1.0.1...v1.0.2) (2019-07-14)
 
 
