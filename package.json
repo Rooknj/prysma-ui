@@ -97,6 +97,6 @@
     "styled-components": "4.3.2",
     "subscriptions-transport-ws": "0.9.16",
     "typeface-roboto": "0.0.54",
-    "yargs": "13.2.4"
+    "yargs": "13.3.0"
   }
 }
