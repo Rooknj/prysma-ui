@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/Rooknj/prysma-ui/compare/v1.0.3...v1.0.4) (2019-07-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v13.3.0 ([5be029c](https://github.com/Rooknj/prysma-ui/commit/5be029c))
+
 ## [1.0.3](https://github.com/Rooknj/prysma-ui/compare/v1.0.2...v1.0.3) (2019-07-15)
 
 
