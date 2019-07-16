@@ -41,9 +41,6 @@ const Light = (
   const { match } = props;
   const { id } = match.params;
 
-  // TODO: Figure out how to include cache-and-network without ts-ignore
-  // We use cache-and-network
-  // @ts-ignore
   const { data, error, loading } = useLightQueryWithSubscriptions({
     fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true,
@@ -53,8 +50,8 @@ const Light = (
   });
   const [newName, setNewName] = React.useState("");
   const [removed, setRemoved] = React.useState(false);
-  const setLight = useThrottledSetLightMutation();
-  const removeLight = useRemoveLightMutation();
+  const [setLight] = useThrottledSetLightMutation();
+  const [removeLight] = useRemoveLightMutation();
 
   const handleNameChange: ChangeEventHandler<HTMLInputElement> = (e): void => {
     setNewName(e.target.value);
