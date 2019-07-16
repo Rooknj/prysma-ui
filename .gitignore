@@ -2,6 +2,9 @@
 .vscode
 /data
 *.sqlite
+ui.zip
+ui.tar.gz
+
 
 # production
 /build

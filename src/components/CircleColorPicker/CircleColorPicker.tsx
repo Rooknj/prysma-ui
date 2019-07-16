@@ -1,16 +1,30 @@
 import React, { useEffect, useRef } from "react";
 import iro from "@jaames/iro";
+import styled from "styled-components";
+import { Typography } from "@material-ui/core";
 
 export interface CircleColorPickerProps {
   color: string;
   width: number;
+  disabled: boolean;
   onChange: (color: string) => void;
 }
+
+const ColorPickerContainer = styled.div<{ disabled: boolean }>`
+  display: ${({ disabled }): "none" | "flex" => (disabled ? "none" : "flex")};
+`;
+
+const DisabledDiv = styled.div<{ width: number }>`
+  width: ${({ width }): number => width}px;
+  height: ${({ width }): number => width}px;
+  color: ${({ theme }): string => theme.palette.text.disabled};
+  text-align: center;
+`;
 
 const CircleColorPicker = (
   props: CircleColorPickerProps
 ): React.FunctionComponentElement<CircleColorPickerProps> => {
-  const { onChange, color, width } = props;
+  const { onChange, color, width, disabled } = props;
 
   const inUseRef = useRef<boolean>(false);
   const colorPickerEl = useRef<HTMLDivElement>(null);
@@ -81,12 +95,22 @@ const CircleColorPicker = (
     iroColorPicker.current.resize(width);
   }, [width]);
 
-  return <div id="color-picker-container" ref={colorPickerEl} />;
+  return (
+    <>
+      <ColorPickerContainer id="color-picker-container" ref={colorPickerEl} disabled={disabled} />
+      {disabled && (
+        <DisabledDiv width={width}>
+          <Typography variant="body1">Color Picker Disabled</Typography>
+        </DisabledDiv>
+      )}
+    </>
+  );
 };
 
 CircleColorPicker.defaultProps = {
   color: "#FF0000",
   width: 320,
+  disabled: false,
   onChange: (): void => {},
 };
 

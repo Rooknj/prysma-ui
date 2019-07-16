@@ -11,6 +11,14 @@ module.exports = {
         message: "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
       },
     ],
-    "@semantic-release/github",
+    [
+      "@semantic-release/github",
+      {
+        assets: [
+          { path: "ui.zip", label: "Production App Bundle (zip)" },
+          { path: "ui.tar.gz", label: "Production App Bundle (tar.gz)" },
+        ],
+      },
+    ],
   ],
 };
