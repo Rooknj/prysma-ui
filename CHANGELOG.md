@@ -1,3 +1,12 @@
+## [1.0.5](https://github.com/Rooknj/prysma-ui/compare/v1.0.4...v1.0.5) (2019-07-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-apollo-hooks to v0.5.0 ([531cb7f](https://github.com/Rooknj/prysma-ui/commit/531cb7f))
+* **deps:** update dependency react-apollo-hooks to v0.5.0 ([cc713ea](https://github.com/Rooknj/prysma-ui/commit/cc713ea))
+* updated to use new apollo hooks api ([dfe6268](https://github.com/Rooknj/prysma-ui/commit/dfe6268))
+
 ## [1.0.4](https://github.com/Rooknj/prysma-ui/compare/v1.0.3...v1.0.4) (2019-07-15)
 
 
