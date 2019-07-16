@@ -4,9 +4,9 @@ import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useRemoveLightMutation, Light, useSetLightMutation } from "generated/graphql";
+import { useRemoveLightMutation, Light } from "generated/graphql";
 import { removeLightFromCache } from "lib/graphqlHelpers";
-import { useLightsQueryWithSubscriptions } from "lib/hooks";
+import { useLightsQueryWithSubscriptions, useThrottledSetLightMutation } from "lib/hooks";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -14,16 +14,13 @@ const StyledDiv = styled.div`
 `;
 
 const Home = (): React.FunctionComponentElement<{}> => {
-  // TODO: Figure out how to include cache-and-network without ts-ignore
-  // We use cache-and-network
-  // @ts-ignore
   const { data, error, loading, networkStatus, refetch } = useLightsQueryWithSubscriptions({
     fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true,
   });
 
-  const removeLight = useRemoveLightMutation();
-  const setLight = useSetLightMutation();
+  const [removeLight] = useRemoveLightMutation();
+  const [setLight] = useThrottledSetLightMutation();
 
   const handleRemoveLight = (id: string): MouseEventHandler => (): void => {
     removeLight({
@@ -37,7 +34,6 @@ const Home = (): React.FunctionComponentElement<{}> => {
     });
   };
 
-  // TODO: Throttle this and make it generic
   const handleStateChange = (light: Light): ChangeEventHandler<HTMLInputElement> => (e): void => {
     const on = e.target.checked;
 

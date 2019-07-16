@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
 
 const AddLight = (): React.FunctionComponentElement<{}> => {
   const [newLight, setNewLight] = React.useState("");
-  const addLight = useAddLightMutation();
+  const [addLight] = useAddLightMutation();
   const { data, loading, error } = useDiscoveredLightsQuery({
     fetchPolicy: "network-only",
     pollInterval: 3000,
