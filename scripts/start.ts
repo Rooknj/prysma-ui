@@ -5,6 +5,8 @@ import execa from "execa";
 
 process.env.REACT_APP_ENV = "development";
 
+const { PROXY_PROTOCOL = "http", PROXY_HOST = "prysma.local", PROXY_PORT = "80" } = process.env;
+
 // Crash on unhandled rejections
 process.on("unhandledRejection", (err): never => {
   throw err;
@@ -18,10 +20,10 @@ if (argv.local) {
 
   // Set the env variable to use the local server
   console.log("Using Server at http://localhost:4001");
-  process.env.REACT_APP_USE_LOCAL_SERVER = "true";
   process.env.PROXY = "http://localhost:4001";
 } else {
-  console.log("Using Server at http://prysma.local");
+  process.env.PROXY = `${PROXY_PROTOCOL}://${PROXY_HOST}:${PROXY_PORT}`;
+  console.log(`Using Server at ${process.env.PROXY}`);
 }
 
 execa.sync("react-scripts", ["start", ...startArgs], {
