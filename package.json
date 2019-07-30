@@ -68,7 +68,7 @@
     "lint-staged": "9.2.0",
     "prettier": "1.18.2",
     "react-scripts": "3.0.1",
-    "semantic-release": "15.13.18",
+    "semantic-release": "15.13.19",
     "ts-node": "8.3.0",
     "yargs": "13.3.0",
     "execa": "2.0.3",
