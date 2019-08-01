@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/Rooknj/prysma-ui/compare/v1.0.5...v1.0.6) (2019-08-01)
+
+
+### Bug Fixes
+
+* **deps:** update mui monorepo to v4.3.0 ([2e5d57b](https://github.com/Rooknj/prysma-ui/commit/2e5d57b))
+
 ## [1.0.5](https://github.com/Rooknj/prysma-ui/compare/v1.0.4...v1.0.5) (2019-07-16)
 
 
