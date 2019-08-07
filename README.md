@@ -21,7 +21,6 @@ Currently new releases of Prysma-UI are manually added to Prysma.
 
 - [React](https://github.com/facebook/react)
 - [Apollo](https://www.apollographql.com/docs/react/)
-  - [React-Apollo-Hooks](https://github.com/trojanowski/react-apollo-hooks) (until @apollo/hooks is out of beta)
 - [React-Router](https://reacttraining.com/react-router/)
 - [Styled-Components](https://www.styled-components.com/)
 - [Material-UI](https://material-ui.com/)
