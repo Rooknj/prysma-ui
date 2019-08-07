@@ -5,13 +5,13 @@ import {
   SetLightMutationVariables,
 } from "generated/graphql";
 import throttle from "lodash.throttle";
-import { MutationFn, MutationHookOptions, MutationResult } from "react-apollo-hooks";
+import { MutationHookOptions, MutationTuple } from "@apollo/react-hooks";
 
 const throttleSpeed = process.env.REACT_APP_ENV === "test" ? 0 : 500;
 
 export const useThrottledSetLightMutation = (
-  baseOptions?: MutationHookOptions<SetLightMutation, SetLightMutationVariables, object> | undefined
-): [MutationFn<SetLightMutation, SetLightMutationVariables>, MutationResult<SetLightMutation>] => {
+  baseOptions?: MutationHookOptions<SetLightMutation, SetLightMutationVariables> | undefined
+): MutationTuple<SetLightMutation, SetLightMutationVariables> => {
   const [setLight, result] = useSetLightMutation(baseOptions);
 
   // Use a ref here to store the value of setLightState so that it doesn't change on rerenders.
