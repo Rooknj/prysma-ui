@@ -1,5 +1,5 @@
 import React from "react";
-import { ApolloProvider } from "react-apollo-hooks"; // Connect Apollo to React
+import { ApolloProvider } from "@apollo/react-hooks";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
 import { ThemeProvider } from "styled-components";

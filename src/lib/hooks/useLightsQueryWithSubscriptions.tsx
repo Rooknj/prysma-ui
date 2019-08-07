@@ -6,7 +6,8 @@ import {
   useLightAddedSubscription,
   useLightRemovedSubscription,
 } from "generated/graphql";
-import { QueryHookResult, QueryHookOptions } from "react-apollo-hooks";
+import { QueryHookOptions } from "@apollo/react-hooks";
+import { QueryResult } from "@apollo/react-common";
 import {
   removeDiscoveredLightFromCache,
   addLightToCache,
@@ -14,8 +15,8 @@ import {
 } from "lib/graphqlHelpers";
 
 export const useLightsQueryWithSubscriptions = (
-  queryOptions?: QueryHookOptions<LightsQueryVariables, object>
-): QueryHookResult<LightsQuery, LightsQueryVariables> => {
+  queryOptions?: QueryHookOptions<LightsQuery, LightsQueryVariables>
+): QueryResult<LightsQuery, LightsQueryVariables> => {
   const QueryData = useLightsQuery(queryOptions);
 
   // This will automatically update the light in the cache when it gets a message
