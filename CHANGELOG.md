@@ -1,3 +1,13 @@
+## [1.0.9](https://github.com/Rooknj/prysma-ui/compare/v1.0.8...v1.0.9) (2019-08-11)
+
+
+### Bug Fixes
+
+* **deps:** update apollo graphql packages ([b3c7cac](https://github.com/Rooknj/prysma-ui/commit/b3c7cac))
+* **deps:** update dependency @material-ui/core to v4.3.2 ([2df2319](https://github.com/Rooknj/prysma-ui/commit/2df2319))
+* **deps:** update dependency typeface-roboto to v0.0.75 ([774ad83](https://github.com/Rooknj/prysma-ui/commit/774ad83))
+* **deps:** update react monorepo to v16.9.0 ([cd42370](https://github.com/Rooknj/prysma-ui/commit/cd42370))
+
 ## [1.0.8](https://github.com/Rooknj/prysma-ui/compare/v1.0.7...v1.0.8) (2019-08-08)
 
 
