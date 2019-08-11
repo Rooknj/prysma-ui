@@ -1,12 +1,14 @@
-import React, { MouseEventHandler, ChangeEventHandler } from "react";
+import React, { MouseEventHandler, ChangeEventHandler, Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useRemoveLightMutation, Light } from "generated/graphql";
+import LoadingState from "components/LoadingState";
 import { removeLightFromCache } from "lib/graphqlHelpers";
 import { useLightsQueryWithSubscriptions, useThrottledSetLightMutation } from "lib/hooks";
+import HomeAppBar from "./components/HomeAppBar";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -56,7 +58,7 @@ const Home = (): React.FunctionComponentElement<{}> => {
 
   let Body;
   if (loading || networkStatus === 4) {
-    Body = <Typography variant="body1">Loading...</Typography>;
+    Body = <LoadingState />;
   } else if (error) {
     Body = <Typography variant="body1">Error.</Typography>;
   } else if (!data || !data.lights || !data.lights.length) {
@@ -81,12 +83,11 @@ const Home = (): React.FunctionComponentElement<{}> => {
   }
 
   return (
-    <div>
-      <Typography variant="h4">Prysma</Typography>
-      <Button onClick={handleRefetch}>Refetch</Button>
-      <Typography variant="h6">Light List</Typography>
+    <Fragment>
+      <HomeAppBar />
       {Body}
-    </div>
+      <Button onClick={handleRefetch}>Refetch</Button>
+    </Fragment>
   );
 };
 

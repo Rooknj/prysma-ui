@@ -9,4 +9,11 @@ export default createMuiTheme({
       default: "#212121",
     },
   },
+  overrides: {
+    MuiAppBar: {
+      colorDefault: {
+        backgroundColor: "#333333",
+      },
+    },
+  },
 });
