@@ -6,12 +6,24 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useRemoveLightMutation, Light } from "generated/graphql";
 import LoadingState from "components/LoadingState";
+import ErrorState from "components/ErrorState";
 import { removeLightFromCache } from "lib/graphqlHelpers";
 import { useLightsQueryWithSubscriptions, useThrottledSetLightMutation } from "lib/hooks";
 import HomeAppBar from "./components/HomeAppBar";
+import EmptyState from "./components/EmptyState";
 
 const StyledDiv = styled.div`
   display: flex;
+  align-items: center;
+`;
+
+const HomePageBody = styled.div`
+  display: flex;
+  @media (min-width: 600px) {
+    min-height: calc(100% - 64px);
+  }
+  min-height: calc(100% - 56px);
+  justify-content: center;
   align-items: center;
 `;
 
@@ -60,9 +72,9 @@ const Home = (): React.FunctionComponentElement<{}> => {
   if (loading || networkStatus === 4) {
     Body = <LoadingState />;
   } else if (error) {
-    Body = <Typography variant="body1">Error.</Typography>;
+    Body = <ErrorState onRefresh={handleRefetch} />;
   } else if (!data || !data.lights || !data.lights.length) {
-    Body = <Typography variant="body1">None</Typography>;
+    Body = <EmptyState />;
   } else {
     Body = data.lights.map(
       (light): React.FunctionComponentElement<{}> => (
@@ -85,8 +97,7 @@ const Home = (): React.FunctionComponentElement<{}> => {
   return (
     <Fragment>
       <HomeAppBar />
-      {Body}
-      <Button onClick={handleRefetch}>Refetch</Button>
+      <HomePageBody>{Body}</HomePageBody>
     </Fragment>
   );
 };
