@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import { useAddLightMutation, useDiscoveredLightsQuery } from "generated/graphql";
 import { addLightToCache, removeDiscoveredLightFromCache } from "lib/graphqlHelpers";
+import AddLightHeader from "./components/AddLightHeader";
+import DiscoveredLightList from "./components/DiscoveredLightList";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -21,23 +23,6 @@ const AddLight = (): React.FunctionComponentElement<{}> => {
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setNewLight(e.target.value);
-  };
-
-  const handleAddLight = (id: string): React.MouseEventHandler => (): void => {
-    addLight({
-      variables: { id },
-      update: (proxy, { data: addLightData }): void => {
-        if (!addLightData || !addLightData.addLight) return;
-        const lightToAdd = addLightData.addLight;
-
-        /**
-         * Note: This will not automatically remove the light from the discoveredLights list if a
-         * discoveredLights query is already in flight. It will correctly update after the query is finished.
-         */
-        removeDiscoveredLightFromCache(proxy, lightToAdd);
-        addLightToCache(proxy, lightToAdd);
-      },
-    });
   };
 
   const handleAddCustomLight: React.MouseEventHandler = (): void => {
@@ -63,26 +48,21 @@ const AddLight = (): React.FunctionComponentElement<{}> => {
   } else if (!data || !data.discoveredLights || !data.discoveredLights.length) {
     Body = <Typography variant="body1">None</Typography>;
   } else {
-    Body = data.discoveredLights.map(
-      (light): React.FunctionComponentElement<{}> => (
-        <StyledDiv key={light.id}>
-          <Button onClick={handleAddLight(light.id)}>Add</Button>
-          <Typography variant="body1">{light.id}</Typography>
-        </StyledDiv>
-      )
-    );
+    Body = <DiscoveredLightList discoveredLights={data.discoveredLights} />;
   }
 
   return (
-    <div>
-      <Typography variant="h4">Add Light</Typography>
+    <Fragment>
+      <AddLightHeader />
       <StyledDiv>
         <Button onClick={handleAddCustomLight}>Add</Button>
         <TextField placeholder="New Light ID" value={newLight} onChange={handleChange} />
       </StyledDiv>
-      <Typography variant="h6">Discovered Lights</Typography>
+      <Typography variant="h6" align="center">
+        Select a Light to Add
+      </Typography>
       {Body}
-    </div>
+    </Fragment>
   );
 };
 
