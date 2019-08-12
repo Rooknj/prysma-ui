@@ -3,7 +3,7 @@ import styled from "styled-components";
 import LoadingState from "components/LoadingState";
 import ErrorState from "components/ErrorState";
 import { useLightsQueryWithSubscriptions } from "lib/hooks";
-import HomeAppBar from "./components/HomeAppBar";
+import HomeHeader from "./components/HomeHeader";
 import EmptyState from "./components/EmptyState";
 import LightList from "./components/LightList";
 
@@ -48,7 +48,7 @@ const Home = (): React.FunctionComponentElement<{}> => {
 
   return (
     <Fragment>
-      <HomeAppBar />
+      <HomeHeader />
       {Body}
     </Fragment>
   );

@@ -26,7 +26,7 @@ const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "inner
   (props, ref) => <Link innerRef={ref as any} to="/addLight" {...props} />
 );
 
-const HomeAppBar = (): React.FunctionComponentElement<{}> => {
+const HomeHeader = (): React.FunctionComponentElement<{}> => {
   return (
     <AppBar position="static" color="default">
       <StyledToolbar>
@@ -42,4 +42,4 @@ const HomeAppBar = (): React.FunctionComponentElement<{}> => {
   );
 };
 
-export default HomeAppBar;
+export default HomeHeader;
