@@ -16,8 +16,8 @@ const DiscoveredLightList = (
       <Divider />
       {discoveredLights.map(
         (light): React.FunctionComponentElement<{}> => (
-          <Fragment>
-            <DiscoveredLight key={light.id} {...light} />
+          <Fragment key={light.id}>
+            <DiscoveredLight {...light} />
             <Divider />
           </Fragment>
         )
