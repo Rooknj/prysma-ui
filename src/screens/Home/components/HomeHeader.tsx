@@ -15,6 +15,7 @@ const StyledImg = styled.img`
 const StyledToolbar = styled(Toolbar)`
   justify-content: space-between;
   align-items: center;
+  min-height: 56px;
 `;
 
 /* TODO: Remove the forwardRef when available

@@ -3,11 +3,7 @@ import ErrorIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-
-const ErrorContainer = styled.div`
-  text-align: center;
-  height: fit-content;
-`;
+import ZeroState from "./ZeroState";
 
 const StyledErrorIcon = styled(ErrorIcon)`
   font-size: 10rem;
@@ -33,7 +29,7 @@ export interface ErrorStateProps {
 const ErrorState = (props: ErrorStateProps): React.FunctionComponentElement<ErrorStateProps> => {
   const { onRefresh } = props;
   return (
-    <ErrorContainer>
+    <ZeroState>
       <StyledErrorIcon />
       <PrimaryText variant="h5" color="textPrimary">
         Uh Oh!
@@ -44,7 +40,7 @@ const ErrorState = (props: ErrorStateProps): React.FunctionComponentElement<Erro
       <ActionButton variant="contained" color="primary" size="large" onClick={onRefresh}>
         Refresh
       </ActionButton>
-    </ErrorContainer>
+    </ZeroState>
   );
 };
 

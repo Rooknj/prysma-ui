@@ -4,11 +4,7 @@ import Link from "@material-ui/core/Link";
 import styled from "styled-components";
 import EmptyIcon from "mdi-material-ui/LightbulbOffOutline";
 import { Link as RouterLink } from "react-router-dom";
-
-const EmptyStateContainer = styled.div`
-  text-align: center;
-  height: fit-content;
-`;
+import ZeroState from "components/ZeroState";
 
 const StyledEmptyIcon = styled(EmptyIcon)`
   font-size: 10rem;
@@ -21,7 +17,7 @@ const PrimaryText = styled(Typography)`
 
 const EmptyState = (): React.FunctionComponentElement<{}> => {
   return (
-    <EmptyStateContainer>
+    <ZeroState>
       <StyledEmptyIcon />
       <PrimaryText variant="h5" color="textPrimary">
         No Lights Added
@@ -29,7 +25,7 @@ const EmptyState = (): React.FunctionComponentElement<{}> => {
       <Link component={RouterLink} variant="subtitle1" to="/addLight">
         Connect a Light
       </Link>
-    </EmptyStateContainer>
+    </ZeroState>
   );
 };
 
