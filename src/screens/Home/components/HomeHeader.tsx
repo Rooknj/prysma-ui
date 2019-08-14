@@ -1,21 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AddIcon from "@material-ui/icons/Add";
 import prysmaLogo from "assets/images/prysma-logo.svg";
 import { LinkProps, Link } from "react-router-dom";
+import Header from "components/Header";
 
 const StyledImg = styled.img`
   height: 32px;
-`;
-
-const StyledToolbar = styled(Toolbar)`
-  justify-content: space-between;
-  align-items: center;
-  min-height: 56px;
 `;
 
 /* TODO: Remove the forwardRef when available
@@ -29,17 +22,15 @@ const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "inner
 
 const HomeHeader = (): React.FunctionComponentElement<{}> => {
   return (
-    <AppBar position="static" color="default">
-      <StyledToolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu">
-          <MenuIcon />
-        </IconButton>
-        <StyledImg src={prysmaLogo} alt="Prysma Logo" />
-        <IconButton edge="end" color="inherit" aria-label="add light" component={CollisionLink}>
-          <AddIcon />
-        </IconButton>
-      </StyledToolbar>
-    </AppBar>
+    <Header>
+      <IconButton edge="start" color="inherit" aria-label="menu">
+        <MenuIcon />
+      </IconButton>
+      <StyledImg src={prysmaLogo} alt="Prysma Logo" />
+      <IconButton edge="end" color="inherit" aria-label="add light" component={CollisionLink}>
+        <AddIcon />
+      </IconButton>
+    </Header>
   );
 };
 

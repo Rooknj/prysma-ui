@@ -1,16 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import BackIcon from "@material-ui/icons/ArrowBack";
 import { LinkProps, Link } from "react-router-dom";
 import { Typography, CircularProgress } from "@material-ui/core";
-
-const StyledToolbar = styled(Toolbar)`
-  justify-content: space-between;
-  align-items: center;
-`;
+import Header from "components/Header";
 
 /* TODO: Remove the forwardRef when available
   The usage of React.forwardRef will no longer be required for react-router-dom v6.
@@ -23,17 +16,15 @@ const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "inner
 
 const AddLightHeader = (): React.FunctionComponentElement<{}> => {
   return (
-    <AppBar position="static" color="default">
-      <StyledToolbar>
-        <IconButton edge="start" color="inherit" aria-label="back" component={CollisionLink}>
-          <BackIcon />
-        </IconButton>
-        <Typography variant="h6" noWrap>
-          Searching...
-        </Typography>
-        <CircularProgress size={32} />
-      </StyledToolbar>
-    </AppBar>
+    <Header>
+      <IconButton edge="start" color="inherit" aria-label="back" component={CollisionLink}>
+        <BackIcon />
+      </IconButton>
+      <Typography variant="h6" noWrap>
+        Searching...
+      </Typography>
+      <CircularProgress size={32} />
+    </Header>
   );
 };
 
