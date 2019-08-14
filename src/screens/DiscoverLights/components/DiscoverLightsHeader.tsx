@@ -15,7 +15,7 @@ const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "inner
   (props, ref) => <Link innerRef={ref as any} to={routes.home} {...props} />
 );
 
-const AddLightHeader = (): React.FunctionComponentElement<{}> => {
+const DiscoverLightsHeader = (): React.FunctionComponentElement<{}> => {
   return (
     <Header>
       <IconButton edge="start" color="inherit" aria-label="back" component={CollisionLink}>
@@ -29,4 +29,4 @@ const AddLightHeader = (): React.FunctionComponentElement<{}> => {
   );
 };
 
-export default AddLightHeader;
+export default DiscoverLightsHeader;

@@ -7,6 +7,8 @@ const ZeroState = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-left: 24px;
+  margin-right: 24px;
 `;
 
 export default ZeroState;

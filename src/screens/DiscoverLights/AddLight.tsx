@@ -1,56 +1,46 @@
-import React, { Fragment } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import React from "react";
 import styled from "styled-components";
-import { useAddLightMutation, useDiscoveredLightsQuery } from "generated/graphql";
-import { addLightToCache, removeDiscoveredLightFromCache } from "lib/graphqlHelpers";
+import { Link as RouterLink } from "react-router-dom";
+import routes from "lib/routes";
+import Link from "@material-ui/core/Link";
+import { useDiscoveredLightsQuery } from "generated/graphql";
 import LoadingState from "components/LoadingState";
 import ErrorState from "components/ErrorState";
-import AddLightHeader from "./components/AddLightHeader";
+import DiscoverLightsHeader from "./components/DiscoverLightsHeader";
 import DiscoveredLights from "./components/DiscoveredLights";
 import EmptyState from "./components/EmptyState";
 
-// const DiscoverLightsContainer = styled.div`
-//   height: 100%;
-//   width: 100%;
-//   display: grid;
-//   grid-template-rows: 56px 1fr;
-//   grid-template-areas:
-//     "header"
-//     "content";
-// `;
-
-const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
+const DiscoverLightsContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 56px 1fr auto;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
 `;
 
-const AddLight = (): React.FunctionComponentElement<{}> => {
-  const [newLight, setNewLight] = React.useState("");
-  const [addLight] = useAddLightMutation();
+const Header = styled(DiscoverLightsHeader)`
+  grid-area: header;
+`;
+
+const Content = styled.div`
+  grid-area: content;
+  overflow-y: auto;
+`;
+
+const Footer = styled.div`
+  grid-area: footer;
+  text-align: center;
+  margin-bottom: 24px;
+`;
+
+const DiscoverLights = (): React.FunctionComponentElement<{}> => {
   const { data, loading, error } = useDiscoveredLightsQuery({
     fetchPolicy: "network-only",
     pollInterval: 3000,
   });
-
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
-    setNewLight(e.target.value);
-  };
-
-  const handleAddCustomLight: React.MouseEventHandler = (): void => {
-    addLight({
-      variables: { id: newLight },
-      update: (proxy, { data: addLightData }): void => {
-        if (!addLightData || !addLightData.addLight) return;
-        const lightToAdd = addLightData.addLight;
-
-        removeDiscoveredLightFromCache(proxy, lightToAdd);
-        addLightToCache(proxy, lightToAdd);
-      },
-    }).then((): void => {
-      setNewLight("");
-    });
-  };
 
   let Body;
   if (loading) {
@@ -64,15 +54,41 @@ const AddLight = (): React.FunctionComponentElement<{}> => {
   }
 
   return (
-    <Fragment>
-      <AddLightHeader />
-      <StyledDiv>
-        <Button onClick={handleAddCustomLight}>Add</Button>
-        <TextField placeholder="New Light ID" value={newLight} onChange={handleChange} />
-      </StyledDiv>
-      {Body}
-    </Fragment>
+    <DiscoverLightsContainer>
+      <Header />
+      <Content>{Body}</Content>
+      <Footer>
+        <Link component={RouterLink} variant="subtitle1" to={routes.addLight}>
+          Manually Input ID
+        </Link>
+      </Footer>
+    </DiscoverLightsContainer>
   );
 };
 
-export default AddLight;
+export default DiscoverLights;
+
+//   const StyledDiv = styled.div`
+//   display: flex;
+//   align-items: center;
+// `;
+// const [newLight, setNewLight] = React.useState("");
+// const [addLight] = useAddLightMutation();
+// const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
+//   setNewLight(e.target.value);
+// };
+
+// const handleAddCustomLight: React.MouseEventHandler = (): void => {
+//   addLight({
+//     variables: { id: newLight },
+//     update: (proxy, { data: addLightData }): void => {
+//       if (!addLightData || !addLightData.addLight) return;
+//       const lightToAdd = addLightData.addLight;
+
+//       removeDiscoveredLightFromCache(proxy, lightToAdd);
+//       addLightToCache(proxy, lightToAdd);
+//     },
+//   }).then((): void => {
+//     setNewLight("");
+//   });
+// };

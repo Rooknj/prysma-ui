@@ -1,13 +1,10 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 import styled from "styled-components";
-import EmptyIcon from "mdi-material-ui/LightbulbOffOutline";
-import { Link as RouterLink } from "react-router-dom";
+import WifiIcon from "@material-ui/icons/Wifi";
 import ZeroState from "components/ZeroState";
-import routes from "lib/routes";
 
-const StyledEmptyIcon = styled(EmptyIcon)`
+const StyledEmptyIcon = styled(WifiIcon)`
   font-size: 10rem;
   margin-bottom: ${(props): number => props.theme.spacing(2)}px;
 `;
@@ -21,11 +18,12 @@ const EmptyState = (): React.FunctionComponentElement<{}> => {
     <ZeroState>
       <StyledEmptyIcon />
       <PrimaryText variant="h5" color="textPrimary">
-        No Lights Added
+        Connect a Light To WiFi...
       </PrimaryText>
-      <Link component={RouterLink} variant="subtitle1" to={routes.discoverLights}>
-        Connect a Light
-      </Link>
+      <Typography variant="body2" color="textSecondary">
+        Go to WiFi in your device settings and search for Prysma-XXXXXXXX. Follow the instructions
+        on the captive portal once connected.
+      </Typography>
     </ZeroState>
   );
 };

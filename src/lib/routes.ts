@@ -3,4 +3,5 @@ export default {
   discoverLights: "/discoverLights",
   light: "/light",
   lightId: ":id",
+  addLight: "/addLight",
 };

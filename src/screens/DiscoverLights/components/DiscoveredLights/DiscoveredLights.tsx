@@ -1,7 +1,23 @@
-import React, { Fragment } from "react";
+import React from "react";
+import styled from "styled-components";
 import { Typography } from "@material-ui/core";
 import { Light } from "generated/graphql";
 import DiscoveredLightList from "./DiscoveredLightList";
+
+const PageTitle = styled(Typography)`
+  margin-top: 16px;
+  margin-bottom: 16px;
+`;
+
+const DiscoveredLightsContainer = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+`;
+
+const LightListContainer = styled.div`
+  overflow-y: scroll;
+`;
 
 export interface DiscoveredLightsProps {
   discoveredLights: Light[];
@@ -12,12 +28,14 @@ const DiscoveredLights = (
 ): React.FunctionComponentElement<DiscoveredLightsProps> => {
   const { discoveredLights } = props;
   return (
-    <Fragment>
-      <Typography variant="h6" align="center">
+    <DiscoveredLightsContainer>
+      <PageTitle variant="h5" align="center">
         Select a Light to Add
-      </Typography>
-      <DiscoveredLightList discoveredLights={discoveredLights} />{" "}
-    </Fragment>
+      </PageTitle>
+      <LightListContainer>
+        <DiscoveredLightList discoveredLights={discoveredLights} />
+      </LightListContainer>
+    </DiscoveredLightsContainer>
   );
 };
 
