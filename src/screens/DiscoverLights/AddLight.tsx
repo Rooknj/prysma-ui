@@ -1,12 +1,24 @@
 import React, { Fragment } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import { useAddLightMutation, useDiscoveredLightsQuery } from "generated/graphql";
 import { addLightToCache, removeDiscoveredLightFromCache } from "lib/graphqlHelpers";
+import LoadingState from "components/LoadingState";
+import ErrorState from "components/ErrorState";
 import AddLightHeader from "./components/AddLightHeader";
-import DiscoveredLightList from "./components/DiscoveredLightList";
+import DiscoveredLights from "./components/DiscoveredLights";
+import EmptyState from "./components/EmptyState";
+
+// const DiscoverLightsContainer = styled.div`
+//   height: 100%;
+//   width: 100%;
+//   display: grid;
+//   grid-template-rows: 56px 1fr;
+//   grid-template-areas:
+//     "header"
+//     "content";
+// `;
 
 const StyledDiv = styled.div`
   display: flex;
@@ -42,13 +54,13 @@ const AddLight = (): React.FunctionComponentElement<{}> => {
 
   let Body;
   if (loading) {
-    Body = <Typography variant="body1">Loading...</Typography>;
+    Body = <LoadingState />;
   } else if (error) {
-    Body = <Typography variant="body1">Error</Typography>;
+    Body = <ErrorState />;
   } else if (!data || !data.discoveredLights || !data.discoveredLights.length) {
-    Body = <Typography variant="body1">None</Typography>;
+    Body = <EmptyState />;
   } else {
-    Body = <DiscoveredLightList discoveredLights={data.discoveredLights} />;
+    Body = <DiscoveredLights discoveredLights={data.discoveredLights} />;
   }
 
   return (
@@ -58,9 +70,6 @@ const AddLight = (): React.FunctionComponentElement<{}> => {
         <Button onClick={handleAddCustomLight}>Add</Button>
         <TextField placeholder="New Light ID" value={newLight} onChange={handleChange} />
       </StyledDiv>
-      <Typography variant="h6" align="center">
-        Select a Light to Add
-      </Typography>
       {Body}
     </Fragment>
   );

@@ -4,6 +4,7 @@ import BackIcon from "@material-ui/icons/ArrowBack";
 import { LinkProps, Link } from "react-router-dom";
 import { Typography, CircularProgress } from "@material-ui/core";
 import Header from "components/Header";
+import routes from "lib/routes";
 
 /* TODO: Remove the forwardRef when available
   The usage of React.forwardRef will no longer be required for react-router-dom v6.
@@ -11,7 +12,7 @@ import Header from "components/Header";
 */
 const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "innerRef" | "to">>(
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
-  (props, ref) => <Link innerRef={ref as any} to="/" {...props} />
+  (props, ref) => <Link innerRef={ref as any} to={routes.home} {...props} />
 );
 
 const AddLightHeader = (): React.FunctionComponentElement<{}> => {

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { useRemoveLightMutation, Light } from "generated/graphql";
 import { useThrottledSetLightMutation } from "lib/hooks";
 import { removeLightFromCache } from "lib/graphqlHelpers";
+import routes from "lib/routes";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -63,7 +64,7 @@ const LightList = (props: LightListProps): React.FunctionComponentElement<LightL
               disabled={!light.connected}
               color="primary"
             />
-            <Link to={`/light/${light.id}`}>
+            <Link to={`${routes.light}/${light.id}`}>
               <Typography variant="body1">{light.name}</Typography>
             </Link>
           </StyledDiv>

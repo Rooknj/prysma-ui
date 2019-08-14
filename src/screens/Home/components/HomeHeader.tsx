@@ -6,6 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import prysmaLogo from "assets/images/prysma-logo.svg";
 import { LinkProps, Link } from "react-router-dom";
 import Header from "components/Header";
+import routes from "lib/routes";
 
 const StyledImg = styled.img`
   height: 32px;
@@ -17,7 +18,7 @@ const StyledImg = styled.img`
 */
 const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "innerRef" | "to">>(
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
-  (props, ref) => <Link innerRef={ref as any} to="/addLight" {...props} />
+  (props, ref) => <Link innerRef={ref as any} to={routes.discoverLights} {...props} />
 );
 
 const HomeHeader = (): React.FunctionComponentElement<{}> => {

@@ -10,6 +10,7 @@ import Slider from "components/SmoothSlider";
 import { useLightQueryWithSubscriptions, useThrottledSetLightMutation } from "lib/hooks";
 import { removeLightFromCache } from "lib/graphqlHelpers";
 import CircleColorPicker from "components/CircleColorPicker";
+import routes from "lib/routes";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -270,11 +271,11 @@ const Light = (
 
   return (
     <div>
-      <Link to="/">
+      <Link to={routes.home}>
         <Button>{"< Back"}</Button>
       </Link>
       {Body}
-      {removed && <Redirect push to="/" />}
+      {removed && <Redirect push to={routes.home} />}
     </div>
   );
 };
