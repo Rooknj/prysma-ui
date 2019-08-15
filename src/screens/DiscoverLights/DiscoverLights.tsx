@@ -14,7 +14,7 @@ const DiscoverLightsContainer = styled.div`
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 56px 1fr auto;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header"
     "content"

@@ -12,7 +12,7 @@ const HomePageContainer = styled.div`
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 56px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
     "header"
     "content";

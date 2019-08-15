@@ -6,7 +6,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 const StyledToolbar = styled(Toolbar)`
   justify-content: space-between;
   align-items: center;
-  min-height: 56px;
 `;
 
 export interface HeaderProps {
