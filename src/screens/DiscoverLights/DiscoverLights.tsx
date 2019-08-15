@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, RouteComponentProps } from "react-router-dom";
 import routes from "lib/routes";
 import Link from "@material-ui/core/Link";
 import { useDiscoveredLightsQuery } from "generated/graphql";
@@ -36,7 +36,9 @@ const Footer = styled.div`
   margin-bottom: 24px;
 `;
 
-const DiscoverLights = (): React.FunctionComponentElement<{}> => {
+const DiscoverLights = (
+  _: RouteComponentProps
+): React.FunctionComponentElement<RouteComponentProps> => {
   const { data, loading, error } = useDiscoveredLightsQuery({
     fetchPolicy: "network-only",
     pollInterval: 3000,

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { RouteComponentProps } from "react-router-dom";
 import LoadingState from "components/LoadingState";
 import ErrorState from "components/ErrorState";
 import { useLightsQueryWithSubscriptions } from "lib/hooks";
@@ -25,7 +26,7 @@ const Content = styled.div`
   grid-area: "content";
 `;
 
-const Home = (): React.FunctionComponentElement<{}> => {
+const Home = (_: RouteComponentProps): React.FunctionComponentElement<RouteComponentProps> => {
   const { data, error, loading, networkStatus, refetch } = useLightsQueryWithSubscriptions({
     fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true,
