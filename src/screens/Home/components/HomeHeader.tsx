@@ -5,7 +5,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AddIcon from "@material-ui/icons/Add";
 import prysmaLogo from "assets/images/prysma-logo.svg";
 import { LinkProps, Link } from "react-router-dom";
-import Header from "components/Header";
+import { Header, HeaderCenter, HeaderRight, HeaderLeft } from "components/Header";
 import routes from "lib/routes";
 
 const StyledImg = styled.img`
@@ -24,13 +24,19 @@ const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "inner
 const HomeHeader = (): React.FunctionComponentElement<{}> => {
   return (
     <Header>
-      <IconButton edge="start" color="inherit" aria-label="menu">
-        <MenuIcon />
-      </IconButton>
-      <StyledImg src={prysmaLogo} alt="Prysma Logo" />
-      <IconButton edge="end" color="inherit" aria-label="add light" component={CollisionLink}>
-        <AddIcon />
-      </IconButton>
+      <HeaderLeft>
+        <IconButton edge="start" color="inherit" aria-label="menu">
+          <MenuIcon />
+        </IconButton>
+      </HeaderLeft>
+      <HeaderCenter>
+        <StyledImg src={prysmaLogo} alt="Prysma Logo" />
+      </HeaderCenter>
+      <HeaderRight>
+        <IconButton edge="end" color="inherit" aria-label="add light" component={CollisionLink}>
+          <AddIcon />
+        </IconButton>
+      </HeaderRight>
     </Header>
   );
 };
