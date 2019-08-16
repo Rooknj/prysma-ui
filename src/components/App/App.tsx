@@ -10,6 +10,7 @@ import NotFound from "screens/NotFound";
 import Light from "screens/Light";
 import DiscoverLights from "screens/DiscoverLights";
 import Home from "screens/Home";
+import AddLight from "screens/AddLight";
 import theme from "./theme";
 import { GlobalStyle } from "./GlobalStyle";
 
@@ -24,6 +25,7 @@ const App = (): React.FunctionComponentElement<{}> => (
             <Switch>
               <Route path={routes.home} exact component={Home} />
               <Route path={routes.discoverLights} exact component={DiscoverLights} />
+              <Route path={routes.addLight} exact component={AddLight} />
               <Route path={`${routes.light}/${routes.lightId}`} exact component={Light} />
               <Route component={NotFound} />
             </Switch>

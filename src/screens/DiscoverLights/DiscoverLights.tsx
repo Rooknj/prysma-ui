@@ -69,28 +69,3 @@ const DiscoverLights = (
 };
 
 export default DiscoverLights;
-
-//   const StyledDiv = styled.div`
-//   display: flex;
-//   align-items: center;
-// `;
-// const [newLight, setNewLight] = React.useState("");
-// const [addLight] = useAddLightMutation();
-// const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
-//   setNewLight(e.target.value);
-// };
-
-// const handleAddCustomLight: React.MouseEventHandler = (): void => {
-//   addLight({
-//     variables: { id: newLight },
-//     update: (proxy, { data: addLightData }): void => {
-//       if (!addLightData || !addLightData.addLight) return;
-//       const lightToAdd = addLightData.addLight;
-
-//       removeDiscoveredLightFromCache(proxy, lightToAdd);
-//       addLightToCache(proxy, lightToAdd);
-//     },
-//   }).then((): void => {
-//     setNewLight("");
-//   });
-// };
