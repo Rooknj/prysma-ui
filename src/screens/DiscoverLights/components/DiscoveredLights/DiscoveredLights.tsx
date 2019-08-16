@@ -5,8 +5,8 @@ import { Light } from "generated/graphql";
 import DiscoveredLightList from "./DiscoveredLightList";
 
 const PageTitle = styled(Typography)`
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 `;
 
 const DiscoveredLightsContainer = styled.div`

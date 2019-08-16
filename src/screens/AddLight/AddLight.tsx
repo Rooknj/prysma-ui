@@ -28,7 +28,7 @@ const Content = styled.div`
 `;
 
 const PageTitle = styled(Typography)`
-  margin-top: 16px;
+  margin-top: 24px;
   margin-bottom: 24px;
 `;
 
