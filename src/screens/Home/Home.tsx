@@ -19,11 +19,11 @@ const HomePageContainer = styled.div`
 `;
 
 const Header = styled(HomeHeader)`
-  grid-area: "header";
+  grid-area: header;
 `;
 
 const Content = styled.div`
-  grid-area: "content";
+  grid-area: content;
 `;
 
 const Home = (_: RouteComponentProps): React.FunctionComponentElement<RouteComponentProps> => {
