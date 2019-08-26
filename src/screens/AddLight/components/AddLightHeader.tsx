@@ -15,8 +15,7 @@ const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "inner
   (props, ref) => <Link innerRef={ref as any} to={routes.discoverLights} {...props} />
 );
 
-// TODO: Find a better way to position these elements instead of using an empty div
-const HomeHeader = (): React.FunctionComponentElement<{}> => {
+const AddLightHeader = (): React.FunctionComponentElement<{}> => {
   return (
     <Header>
       <HeaderLeft>
@@ -33,4 +32,4 @@ const HomeHeader = (): React.FunctionComponentElement<{}> => {
   );
 };
 
-export default HomeHeader;
+export default AddLightHeader;

@@ -19,4 +19,3 @@ const NotFound = (
 };
 
 export default NotFound;
-export interface NotFound extends ReturnType<typeof NotFound> {}

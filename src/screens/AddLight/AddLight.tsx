@@ -1,10 +1,11 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { TextField, Typography, Fab } from "@material-ui/core";
 import { useAddLightMutation } from "generated/graphql";
 import { removeDiscoveredLightFromCache, addLightToCache } from "lib/graphqlHelpers";
 import AddLightHeader from "./components/AddLightHeader";
+import routes from "lib/routes";
 
 const AddLightContainer = styled.div`
   height: 100%;
@@ -46,13 +47,14 @@ const BottomButton = styled(Fab)`
 
 const AddLight = (_: RouteComponentProps): React.FunctionComponentElement<RouteComponentProps> => {
   const [newLight, setNewLight] = React.useState("");
+  const [toSetupLight, setToSetupLight] = React.useState(false);
   const [addLight, { loading }] = useAddLightMutation();
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setNewLight(e.target.value);
   };
 
-  const handleAddCustomLight: React.MouseEventHandler = (): void => {
+  const handleAddCustomLight = (): void => {
     addLight({
       variables: { id: newLight },
       update: (proxy, { data: addLightData }): void => {
@@ -63,9 +65,20 @@ const AddLight = (_: RouteComponentProps): React.FunctionComponentElement<RouteC
         addLightToCache(proxy, lightToAdd);
       },
     }).then((): void => {
-      setNewLight("");
+      setToSetupLight(true);
     });
   };
+
+  const handleKeyDown: React.KeyboardEventHandler = (e): void => {
+    const { key } = e;
+    if (key === "Enter" && newLight) {
+      handleAddCustomLight();
+    }
+  };
+
+  if (toSetupLight === true) {
+    return <Redirect to={routes.setupLight} />;
+  }
 
   return (
     <AddLightContainer>
@@ -78,6 +91,7 @@ const AddLight = (_: RouteComponentProps): React.FunctionComponentElement<RouteC
           label="Light ID"
           value={newLight}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           variant="filled"
           color="primary"
         />
@@ -96,4 +110,3 @@ const AddLight = (_: RouteComponentProps): React.FunctionComponentElement<RouteC
 };
 
 export default AddLight;
-export interface NotFound extends ReturnType<typeof AddLight> {}

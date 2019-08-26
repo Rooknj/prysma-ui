@@ -29,7 +29,7 @@ export const HeaderRight = styled.div`
 `;
 
 export interface HeaderProps {
-  children: React.ReactNode[];
+  children: React.ReactNode | React.ReactNode[];
 }
 
 const Header = (props: HeaderProps): React.FunctionComponentElement<HeaderProps> => {
