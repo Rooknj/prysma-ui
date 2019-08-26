@@ -37,6 +37,7 @@ const Home = (_: RouteComponentProps): React.FunctionComponentElement<RouteCompo
   };
 
   let Body;
+  // TODO: Don't show loading status when data is not empty
   if (loading || networkStatus === 4) {
     Body = <LoadingState />;
   } else if (error) {

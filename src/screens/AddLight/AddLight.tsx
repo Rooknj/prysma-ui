@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { TextField, Typography, Fab } from "@material-ui/core";
 import { useAddLightMutation } from "generated/graphql";
 import { removeDiscoveredLightFromCache, addLightToCache } from "lib/graphqlHelpers";
-import AddLightHeader from "./components/AddLightHeader";
 import routes from "lib/routes";
+import AddLightHeader from "./components/AddLightHeader";
 
 const AddLightContainer = styled.div`
   height: 100%;
@@ -77,7 +77,7 @@ const AddLight = (_: RouteComponentProps): React.FunctionComponentElement<RouteC
   };
 
   if (toSetupLight === true) {
-    return <Redirect to={routes.setupLight} />;
+    return <Redirect to={{ pathname: routes.setupLight, state: { lightId: newLight } }} />;
   }
 
   return (
@@ -94,13 +94,15 @@ const AddLight = (_: RouteComponentProps): React.FunctionComponentElement<RouteC
           onKeyDown={handleKeyDown}
           variant="filled"
           color="primary"
+          autoFocus
+          disabled={loading}
         />
         <BottomButton
           variant="extended"
           color="primary"
           aria-label="add light"
           onClick={handleAddCustomLight}
-          disabled={loading}
+          disabled={!newLight || loading}
         >
           Add Light
         </BottomButton>

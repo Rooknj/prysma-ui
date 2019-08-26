@@ -10,8 +10,10 @@ import {
 } from "@material-ui/core";
 import IdentifyIcon from "@material-ui/icons/Search";
 import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 import { Light, useAddLightMutation } from "generated/graphql";
 import { removeDiscoveredLightFromCache, addLightToCache } from "lib/graphqlHelpers";
+import routes from "lib/routes";
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 const StyledLightAvatar = styled(Avatar)`
@@ -28,8 +30,9 @@ const DiscoveredLight = (
 ): React.FunctionComponentElement<DiscoveredLightProps> => {
   const { id } = props;
 
+  const [toSetupLight, setToSetupLight] = React.useState(false);
   const [addLight] = useAddLightMutation();
-  // React.MouseEventHandler
+
   const handleAddLight = (): void => {
     addLight({
       variables: { id },
@@ -43,9 +46,14 @@ const DiscoveredLight = (
          */
         removeDiscoveredLightFromCache(proxy, lightToAdd);
         addLightToCache(proxy, lightToAdd);
+        setToSetupLight(true);
       },
     });
   };
+
+  if (toSetupLight === true) {
+    return <Redirect to={{ pathname: routes.setupLight, state: { lightId: id } }} />;
+  }
 
   return (
     <ListItem button onClick={handleAddLight}>

@@ -1,7 +1,9 @@
 import React from "react";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { TextField, Typography, Fab } from "@material-ui/core";
+import { useSetLightMutation } from "generated/graphql";
+import routes from "lib/routes";
 import SetupLightHeader from "./components/SetupLightHeader";
 
 const SetupLightContainer = styled.div`
@@ -43,16 +45,23 @@ const BottomButton = styled(Fab)`
 `;
 
 const SetupLight = (
-  _: RouteComponentProps
+  props: RouteComponentProps
 ): React.FunctionComponentElement<RouteComponentProps> => {
+  const { location } = props;
   const [newLightName, setNewLightName] = React.useState("");
+  const [toHome, setToHome] = React.useState(false);
+  const [setLight, { loading }] = useSetLightMutation();
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e): void => {
     setNewLightName(e.target.value);
   };
 
   const handleRenameLight = (): void => {
-    alert("Rename Light");
+    setLight({
+      variables: { id: location.state.lightId, lightData: { name: newLightName } },
+    }).then((): void => {
+      setToHome(true);
+    });
   };
 
   const handleKeyDown: React.KeyboardEventHandler = (e): void => {
@@ -62,6 +71,11 @@ const SetupLight = (
     }
   };
 
+  if (toHome) {
+    return <Redirect to={routes.home} />;
+  }
+
+  // TODO: Figure out why the mobile keyboard doesn't show up on autoFocus
   return (
     <SetupLightContainer>
       <Header />
@@ -76,15 +90,17 @@ const SetupLight = (
           variant="filled"
           color="primary"
           onKeyDown={handleKeyDown}
+          autoFocus
+          disabled={loading}
         />
         <BottomButton
           variant="extended"
           color="primary"
           aria-label="add light"
           onClick={handleRenameLight}
-          // disabled={loading}
+          disabled={!newLightName || loading}
         >
-          Add Light
+          Finish
         </BottomButton>
       </Content>
     </SetupLightContainer>
