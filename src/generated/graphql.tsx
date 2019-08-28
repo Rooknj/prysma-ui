@@ -161,6 +161,15 @@ export type SetLightMutation = { __typename?: "Mutation" } & {
   setLight: { __typename?: "Light" } & LightFieldsFragment;
 };
 
+export type ChangeOnMutationVariables = {
+  id: Scalars["String"];
+  lightData: LightInput;
+};
+
+export type ChangeOnMutation = { __typename?: "Mutation" } & {
+  setLight: { __typename?: "Light" } & Pick<Light, "id" | "on">;
+};
+
 export type AddLightMutationVariables = {
   id: Scalars["String"];
 };
@@ -229,6 +238,12 @@ export function useLightQuery(
 ) {
   return ApolloReactHooks.useQuery<LightQuery, LightQueryVariables>(LightDocument, baseOptions);
 }
+export function useLightLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<LightQuery, LightQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<LightQuery, LightQueryVariables>(LightDocument, baseOptions);
+}
+
 export type LightQueryHookResult = ReturnType<typeof useLightQuery>;
 export type LightQueryResult = ApolloReactCommon.QueryResult<LightQuery, LightQueryVariables>;
 export const LightsDocument = gql`
@@ -245,6 +260,15 @@ export function useLightsQuery(
 ) {
   return ApolloReactHooks.useQuery<LightsQuery, LightsQueryVariables>(LightsDocument, baseOptions);
 }
+export function useLightsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<LightsQuery, LightsQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<LightsQuery, LightsQueryVariables>(
+    LightsDocument,
+    baseOptions
+  );
+}
+
 export type LightsQueryHookResult = ReturnType<typeof useLightsQuery>;
 export type LightsQueryResult = ApolloReactCommon.QueryResult<LightsQuery, LightsQueryVariables>;
 export const DiscoveredLightsDocument = gql`
@@ -267,6 +291,18 @@ export function useDiscoveredLightsQuery(
     baseOptions
   );
 }
+export function useDiscoveredLightsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    DiscoveredLightsQuery,
+    DiscoveredLightsQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<DiscoveredLightsQuery, DiscoveredLightsQueryVariables>(
+    DiscoveredLightsDocument,
+    baseOptions
+  );
+}
+
 export type DiscoveredLightsQueryHookResult = ReturnType<typeof useDiscoveredLightsQuery>;
 export type DiscoveredLightsQueryResult = ApolloReactCommon.QueryResult<
   DiscoveredLightsQuery,
@@ -298,6 +334,33 @@ export type SetLightMutationResult = ApolloReactCommon.MutationResult<SetLightMu
 export type SetLightMutationOptions = ApolloReactCommon.BaseMutationOptions<
   SetLightMutation,
   SetLightMutationVariables
+>;
+export const ChangeOnDocument = gql`
+  mutation changeOn($id: String!, $lightData: LightInput!) {
+    setLight(id: $id, lightData: $lightData) {
+      id
+      on
+    }
+  }
+`;
+export type ChangeOnMutationFn = ApolloReactCommon.MutationFunction<
+  ChangeOnMutation,
+  ChangeOnMutationVariables
+>;
+
+export function useChangeOnMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<ChangeOnMutation, ChangeOnMutationVariables>
+) {
+  return ApolloReactHooks.useMutation<ChangeOnMutation, ChangeOnMutationVariables>(
+    ChangeOnDocument,
+    baseOptions
+  );
+}
+export type ChangeOnMutationHookResult = ReturnType<typeof useChangeOnMutation>;
+export type ChangeOnMutationResult = ApolloReactCommon.MutationResult<ChangeOnMutation>;
+export type ChangeOnMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  ChangeOnMutation,
+  ChangeOnMutationVariables
 >;
 export const AddLightDocument = gql`
   mutation addLight($id: String!) {
