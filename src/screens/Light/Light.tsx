@@ -171,8 +171,10 @@ const Light = (
     }).then((): void => setRemoved(true));
   };
 
+  const isFirstTimeLoading = (): boolean => !!(data && !data.light && loading);
+
   let Body;
-  if (loading) {
+  if (isFirstTimeLoading()) {
     Body = <Typography variant="body1">Loading...</Typography>;
   } else if (error || !data) {
     Body = <Typography variant="body1">Error.</Typography>;

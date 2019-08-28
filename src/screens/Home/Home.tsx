@@ -36,12 +36,13 @@ const Home = (_: RouteComponentProps): React.FunctionComponentElement<RouteCompo
     refetch();
   };
 
+  const isFirstTimeLoading = (): boolean => !!(data && !data.lights && loading);
+
   let Body;
-  // TODO: Don't show loading status when data is not empty
-  if (loading || networkStatus === 4) {
-    Body = <LoadingState />;
-  } else if (error) {
+  if (error) {
     Body = <ErrorState onRefresh={handleRefetch} />;
+  } else if (isFirstTimeLoading() || networkStatus === 4) {
+    Body = <LoadingState />;
   } else if (!data || !data.lights || !data.lights.length) {
     Body = <EmptyState />;
   } else {
