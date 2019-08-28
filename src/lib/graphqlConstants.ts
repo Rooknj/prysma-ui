@@ -1,7 +1,5 @@
 import gql from "graphql-tag";
 
-export const throttleSpeed = process.env.REACT_APP_ENV === "test" ? 0 : 500;
-
 const LIGHT_FIELDS = gql`
   fragment lightFields on Light {
     id

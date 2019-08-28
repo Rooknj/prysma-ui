@@ -1,14 +1,13 @@
-import React, { ChangeEvent, useRef } from "react";
+import React, { ChangeEvent } from "react";
 import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useRemoveLightMutation, Light, useChangeOnMutation } from "generated/graphql";
-import throttle from "lodash.throttle";
 import { removeLightFromCache } from "lib/graphqlHelpers";
 import routes from "lib/routes";
 import { Typography } from "@material-ui/core";
-import { throttleSpeed } from "lib/graphqlConstants";
+import { useThrottledMutation } from "lib/hooks";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -22,7 +21,8 @@ const HomeLight = (props: HomeLightProps): React.FunctionComponentElement<HomeLi
 
   const [removeLight] = useRemoveLightMutation();
   const [changeOn] = useChangeOnMutation();
-  const { current: throttledChangeOn } = useRef(throttle(changeOn, throttleSpeed));
+
+  const throttledChangeOn = useThrottledMutation(changeOn);
 
   const handleRemoveLight = (): void => {
     removeLight({

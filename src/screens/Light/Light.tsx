@@ -1,13 +1,17 @@
 import React, { ChangeEventHandler, MouseEventHandler } from "react";
 import { RouteComponentProps, Link, Redirect } from "react-router-dom";
-import { Light as LightEntity, useRemoveLightMutation } from "generated/graphql";
+import {
+  Light as LightEntity,
+  useRemoveLightMutation,
+  useSetLightMutation,
+} from "generated/graphql";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import Switch from "@material-ui/core/Switch";
 import Slider from "components/SmoothSlider";
-import { useLightQueryWithSubscriptions, useThrottledSetLightMutation } from "lib/hooks";
+import { useLightQueryWithSubscriptions, useThrottledMutation } from "lib/hooks";
 import { removeLightFromCache } from "lib/graphqlHelpers";
 import CircleColorPicker from "components/CircleColorPicker";
 import routes from "lib/routes";
@@ -51,7 +55,8 @@ const Light = (
   });
   const [newName, setNewName] = React.useState("");
   const [removed, setRemoved] = React.useState(false);
-  const [setLight] = useThrottledSetLightMutation();
+  const [setLight] = useSetLightMutation();
+  const throttledSetLight = useThrottledMutation(setLight);
   const [removeLight] = useRemoveLightMutation();
 
   const handleNameChange: ChangeEventHandler<HTMLInputElement> = (e): void => {
@@ -61,7 +66,7 @@ const Light = (
   const handleRenameLight = (currentLight: LightEntity): MouseEventHandler => (): void => {
     const name = newName;
 
-    setLight({
+    throttledSetLight({
       variables: { id: currentLight.id, lightData: { name } },
       optimisticResponse: {
         __typename: "Mutation",
@@ -81,7 +86,7 @@ const Light = (
   ): void => {
     const on = e.target.checked;
 
-    setLight({
+    throttledSetLight({
       variables: { id: currentLight.id, lightData: { on } },
       optimisticResponse: {
         __typename: "Mutation",
@@ -97,7 +102,7 @@ const Light = (
   const handleBrightnessChange = (currentLight: LightEntity): ((value: number) => void) => (
     brightness: number
   ): void => {
-    setLight({
+    throttledSetLight({
       variables: { id: currentLight.id, lightData: { brightness } },
       optimisticResponse: {
         __typename: "Mutation",
@@ -113,7 +118,7 @@ const Light = (
   const handleColorChange = (currentLight: LightEntity): ((value: string) => void) => (
     color
   ): void => {
-    setLight({
+    throttledSetLight({
       variables: { id: currentLight.id, lightData: { color } },
       optimisticResponse: {
         __typename: "Mutation",
@@ -130,7 +135,7 @@ const Light = (
     effect: string,
     currentLight: LightEntity
   ): MouseEventHandler => (): void => {
-    setLight({
+    throttledSetLight({
       variables: { id: currentLight.id, lightData: { effect } },
       optimisticResponse: {
         __typename: "Mutation",
@@ -146,7 +151,7 @@ const Light = (
   const handleSpeedChange = (currentLight: LightEntity): ((value: number) => void) => (
     speed: number
   ): void => {
-    setLight({
+    throttledSetLight({
       variables: { id: currentLight.id, lightData: { speed } },
       optimisticResponse: {
         __typename: "Mutation",
