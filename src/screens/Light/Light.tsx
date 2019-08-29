@@ -18,6 +18,7 @@ import ErrorState from "components/ErrorState";
 import LoadingState from "components/LoadingState";
 import routes from "lib/routes";
 import LightHeader from "./components/LightHeader";
+import DisconnectedState from "./components/DisconnectedState";
 
 const LightPageContainer = styled.div`
   height: 100%;
@@ -206,7 +207,7 @@ const Light = (
   } else if (error || !data) {
     Body = <ErrorState onRefresh={() => refetch()} />;
   } else if (!data.light.connected) {
-    Body = "Light Not Connected";
+    Body = <DisconnectedState />;
   } else {
     const { light } = data;
     Body = (
