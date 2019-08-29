@@ -72,5 +72,6 @@ module.exports = {
     // Project Specific Rules
     "react/destructuring-assignment": "warn",
     "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
+    "@typescript-eslint/explicit-function-return-type": ["warn", { allowExpressions: true }],
   },
 };
