@@ -30,7 +30,7 @@ const HomeHeader = (): React.FunctionComponentElement<{}> => {
         </IconButton>
       </HeaderLeft>
       <HeaderCenter>
-        <StyledImg src={prysmaLogo} alt="Prysma Logo" />
+        <StyledImg src={prysmaLogo} alt="Prysma Logo" onClick={() => window.location.reload()} />
       </HeaderCenter>
       <HeaderRight>
         <IconButton edge="end" color="inherit" aria-label="add light" component={CollisionLink}>
