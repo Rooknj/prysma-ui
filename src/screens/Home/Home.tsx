@@ -24,6 +24,7 @@ const Header = styled(HomeHeader)`
 
 const Content = styled.div`
   grid-area: content;
+  padding-bottom: 24px;
 `;
 
 const Home = (_: RouteComponentProps): React.FunctionComponentElement<RouteComponentProps> => {
