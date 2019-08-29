@@ -94,7 +94,7 @@ const HomeLight = (props: HomeLightProps): React.FunctionComponentElement<HomeLi
   };
 
   if (toLight) {
-    return <Redirect push to={`${routes.light}/${id}`} />;
+    return <Redirect push to={{ pathname: `${routes.light}/${id}`, state: { name } }} />;
   }
 
   return (

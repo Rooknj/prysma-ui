@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler, MouseEventHandler } from "react";
-import { RouteComponentProps, Link, Redirect } from "react-router-dom";
+import { RouteComponentProps, Redirect } from "react-router-dom";
 import {
   Light as LightEntity,
   useRemoveLightMutation,
@@ -14,7 +14,29 @@ import Slider from "components/SmoothSlider";
 import { useLightQueryWithSubscriptions, useThrottledMutation } from "lib/hooks";
 import { removeLightFromCache } from "lib/graphqlHelpers";
 import CircleColorPicker from "components/CircleColorPicker";
+import ErrorState from "components/ErrorState";
+import LoadingState from "components/LoadingState";
 import routes from "lib/routes";
+import LightHeader from "./components/LightHeader";
+
+const LightPageContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "content";
+`;
+
+const Header = styled(LightHeader)`
+  grid-area: header;
+`;
+
+const Content = styled.div`
+  grid-area: content;
+  padding-bottom: 24px;
+`;
 
 const StyledDiv = styled.div`
   display: flex;
@@ -43,10 +65,10 @@ interface MatchParams {
 const Light = (
   props: RouteComponentProps<MatchParams>
 ): React.FunctionComponentElement<RouteComponentProps<MatchParams>> => {
-  const { match } = props;
+  const { match, location } = props;
   const { id } = match.params;
 
-  const { data, error, loading } = useLightQueryWithSubscriptions({
+  const { data, error, loading, refetch, networkStatus } = useLightQueryWithSubscriptions({
     fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true,
     variables: {
@@ -179,10 +201,12 @@ const Light = (
   const isFirstTimeLoading = (): boolean => !!(data && !data.light && loading);
 
   let Body;
-  if (isFirstTimeLoading()) {
-    Body = <Typography variant="body1">Loading...</Typography>;
+  if (isFirstTimeLoading() || networkStatus === 4) {
+    Body = <LoadingState />;
   } else if (error || !data) {
-    Body = <Typography variant="body1">Error.</Typography>;
+    Body = <ErrorState onRefresh={() => refetch()} />;
+  } else if (!data.light.connected) {
+    Body = "Light Not Connected";
   } else {
     const { light } = data;
     Body = (
@@ -276,14 +300,22 @@ const Light = (
     );
   }
 
+  let headerTitle = id;
+  if (data && data.light) {
+    headerTitle = data.light.name;
+  } else if (location.state && location.state.name) {
+    headerTitle = location.state.name;
+  }
+
+  if (removed) {
+    return <Redirect push to={routes.home} />;
+  }
+
   return (
-    <div>
-      <Link to={routes.home}>
-        <Button>{"< Back"}</Button>
-      </Link>
-      {Body}
-      {removed && <Redirect push to={routes.home} />}
-    </div>
+    <LightPageContainer>
+      <Header name={headerTitle} />
+      <Content>{Body}</Content>
+    </LightPageContainer>
   );
 };
 

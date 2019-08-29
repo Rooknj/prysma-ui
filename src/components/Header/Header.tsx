@@ -20,6 +20,7 @@ export const HeaderCenter = styled.div`
   grid-area: center;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 `;
 
 export const HeaderRight = styled.div`

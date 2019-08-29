@@ -33,15 +33,11 @@ const Home = (_: RouteComponentProps): React.FunctionComponentElement<RouteCompo
     notifyOnNetworkStatusChange: true,
   });
 
-  const handleRefetch = async (): Promise<void> => {
-    refetch();
-  };
-
   const isFirstTimeLoading = (): boolean => !!(data && !data.lights && loading);
 
   let Body;
   if (error) {
-    Body = <ErrorState onRefresh={handleRefetch} />;
+    Body = <ErrorState onRefresh={() => refetch()} />;
   } else if (isFirstTimeLoading() || networkStatus === 4) {
     Body = <LoadingState />;
   } else if (!data || !data.lights || !data.lights.length) {
