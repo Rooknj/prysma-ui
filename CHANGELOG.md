@@ -1,3 +1,17 @@
+## [1.0.13](https://github.com/Rooknj/prysma-ui/compare/v1.0.12...v1.0.13) (2019-08-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @material-ui/core to v4.4.0 ([25e896f](https://github.com/Rooknj/prysma-ui/commit/25e896f))
+
+## [1.0.12](https://github.com/Rooknj/prysma-ui/compare/v1.0.11...v1.0.12) (2019-08-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency graphql to v14.5.4 ([a1f2315](https://github.com/Rooknj/prysma-ui/commit/a1f2315))
+
 ## [1.0.11](https://github.com/Rooknj/prysma-ui/compare/v1.0.10...v1.0.11) (2019-08-28)
 
 
