@@ -36,7 +36,7 @@ export interface HeaderProps {
 const Header = (props: HeaderProps): React.FunctionComponentElement<HeaderProps> => {
   const { children } = props;
   return (
-    <AppBar position="static" color="default">
+    <AppBar position="sticky" color="default">
       <StyledToolbar>{children}</StyledToolbar>
     </AppBar>
   );
