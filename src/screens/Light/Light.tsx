@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, MouseEventHandler } from "react";
+import React, { ChangeEventHandler, MouseEventHandler, useState, Fragment } from "react";
 import { RouteComponentProps, Redirect } from "react-router-dom";
 import {
   Light as LightEntity,
@@ -19,6 +19,7 @@ import LoadingState from "components/LoadingState";
 import routes from "lib/routes";
 import LightHeader from "./components/LightHeader";
 import DisconnectedState from "./components/DisconnectedState";
+import SettingsDrawer from "./components/SettingsDrawer";
 
 const LightPageContainer = styled.div`
   height: 100%;
@@ -69,6 +70,9 @@ const Light = (
   const { match, location } = props;
   const { id } = match.params;
 
+  // TODO: Make the drawer open when the route is /{light}/settings
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
   const { data, error, loading, refetch, networkStatus } = useLightQueryWithSubscriptions({
     fetchPolicy: "cache-and-network",
     notifyOnNetworkStatusChange: true,
@@ -76,8 +80,8 @@ const Light = (
       id,
     },
   });
-  const [newName, setNewName] = React.useState("");
-  const [removed, setRemoved] = React.useState(false);
+  const [newName, setNewName] = useState("");
+  const [removed, setRemoved] = useState(false);
   const [setLight] = useSetLightMutation();
   const throttledSetLight = useThrottledMutation(setLight);
   const [removeLight] = useRemoveLightMutation();
@@ -313,10 +317,13 @@ const Light = (
   }
 
   return (
-    <LightPageContainer>
-      <Header name={headerTitle} />
-      <Content>{Body}</Content>
-    </LightPageContainer>
+    <Fragment>
+      <LightPageContainer>
+        <Header name={headerTitle} onSettingsOpen={() => setSettingsOpen(true)} />
+        <Content>{Body}</Content>
+      </LightPageContainer>
+      <SettingsDrawer open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+    </Fragment>
   );
 };
 

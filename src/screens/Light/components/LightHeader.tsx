@@ -17,10 +17,12 @@ const CollisionLink = React.forwardRef<HTMLAnchorElement, Omit<LinkProps, "inner
   (props, ref) => <Link innerRef={ref as any} to={routes.home} {...props} />
 );
 
-export interface LightHeaderProps extends Pick<Light, "name"> {}
+export interface LightHeaderProps extends Pick<Light, "name"> {
+  onSettingsOpen: () => void;
+}
 
 const LightHeader = (props: LightHeaderProps): React.FunctionComponentElement<LightHeaderProps> => {
-  const { name } = props;
+  const { name, onSettingsOpen } = props;
 
   return (
     <Header>
@@ -35,7 +37,7 @@ const LightHeader = (props: LightHeaderProps): React.FunctionComponentElement<Li
         </Typography>
       </HeaderCenter>
       <HeaderRight>
-        <IconButton edge="end" color="inherit" aria-label="settings">
+        <IconButton edge="end" color="inherit" aria-label="settings" onClick={onSettingsOpen}>
           <SettingsIcon />
         </IconButton>
       </HeaderRight>
