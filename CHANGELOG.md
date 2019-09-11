@@ -1,3 +1,10 @@
+## [1.0.17](https://github.com/Rooknj/prysma-ui/compare/v1.0.16...v1.0.17) (2019-09-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @material-ui/core to v4.4.2 ([fd5f3cb](https://github.com/Rooknj/prysma-ui/commit/fd5f3cb))
+
 ## [1.0.16](https://github.com/Rooknj/prysma-ui/compare/v1.0.15...v1.0.16) (2019-09-08)
 
 
