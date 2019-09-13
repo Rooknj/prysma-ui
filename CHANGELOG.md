@@ -1,3 +1,10 @@
+## [1.0.18](https://github.com/Rooknj/prysma-ui/compare/v1.0.17...v1.0.18) (2019-09-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency graphql to v14.5.5 ([a922a5e](https://github.com/Rooknj/prysma-ui/commit/a922a5e))
+
 ## [1.0.17](https://github.com/Rooknj/prysma-ui/compare/v1.0.16...v1.0.17) (2019-09-11)
 
 
