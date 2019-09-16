@@ -1,3 +1,10 @@
+## [1.0.20](https://github.com/Rooknj/prysma-ui/compare/v1.0.19...v1.0.20) (2019-09-16)
+
+
+### Bug Fixes
+
+* **deps:** update apollo graphql packages to v3.1.1 ([305aa55](https://github.com/Rooknj/prysma-ui/commit/305aa55))
+
 ## [1.0.19](https://github.com/Rooknj/prysma-ui/compare/v1.0.18...v1.0.19) (2019-09-15)
 
 
