@@ -1,3 +1,10 @@
+## [1.0.23](https://github.com/Rooknj/prysma-ui/compare/v1.0.22...v1.0.23) (2019-09-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-router-dom to v5.1.0 ([1749f61](https://github.com/Rooknj/prysma-ui/commit/1749f61))
+
 ## [1.0.22](https://github.com/Rooknj/prysma-ui/compare/v1.0.21...v1.0.22) (2019-09-23)
 
 
