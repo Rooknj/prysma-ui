@@ -1,3 +1,10 @@
+## [1.0.25](https://github.com/Rooknj/prysma-ui/compare/v1.0.24...v1.0.25) (2019-09-27)
+
+
+### Bug Fixes
+
+* **deps:** update react monorepo to v16.10.0 ([f7b799b](https://github.com/Rooknj/prysma-ui/commit/f7b799b))
+
 ## [1.0.24](https://github.com/Rooknj/prysma-ui/compare/v1.0.23...v1.0.24) (2019-09-25)
 
 
