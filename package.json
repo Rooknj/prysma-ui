@@ -90,7 +90,7 @@
     "lodash.throttle": "4.1.1",
     "react": "16.10.1",
     "react-dom": "16.10.1",
-    "react-router-dom": "5.1.1",
+    "react-router-dom": "5.1.2",
     "styled-components": "4.4.0",
     "subscriptions-transport-ws": "0.9.16",
     "typeface-roboto": "0.0.75"
