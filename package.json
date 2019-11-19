@@ -68,7 +68,7 @@
     "semantic-release": "15.13.24",
     "ts-node": "8.4.1",
     "typescript": "3.6.3",
-    "yargs": "14.0.0"
+    "yargs": "14.2.2"
   },
   "dependencies": {
     "@apollo/react-common": "3.1.2",
